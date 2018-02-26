@@ -1,0 +1,30 @@
+{% extends "./base.html" %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-6">
+
+
+<ul class="nav" id="side-menu">
+    <li><a href="{% url 'docs:site' 'about' %}" title="About The Project">About</a></li>
+    <li><a href="{% url 'docs:site' 'getting_started' %}" title="Getting Started">Getting Started (de)</a></li>
+    <li><a href="{% url 'docs:site' 'devel' %}" title="Development Setup">Devel</a></li>
+    <li><a href="{% url 'docs:site' 'deploy' %}" title="Index">Deploy</a></li>
+    <li><a href="{% url 'docs:site' 'software' %}" title="Index">Software</a></li>
+</ul>
+
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,90 @@
+{% extends "image/base.html" %}
+
+{% load base %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}Alob Image Filter{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+
+<form action="" method="get">
+        
+{% bootstrap_form filter.form layout='horizontal' %}        
+<br>
+&nbsp;
+<br>      
+{% buttons %}
+{% bootstrap_button content=_("Search") button_type='submit' button_class='btn btn-primary' icon='search' %}
+<button class="btn btn-primary" type="submit" name="csv" value=""><span class="glyphicon glyphicon-export"></span> CSV</button>
+<button class="btn btn-primary" type="submit" name="excel" value=""><span class="glyphicon glyphicon-export"></span> Excel</button>
+<br>
+<br>
+<input type="text" name="pool_name" value="MyPool"/>
+<button class="btn btn-primary" type="submit" name="pool"><span class="glyphicon glyphicon-add"></span> Create Pool</button>
+{% endbuttons %}
+</form>
+
+
+  </div>
+</div>
+
+
+{% if filter.qs %}
+
+<div class="row">
+  <div class="col-md-12">
+    <p>Num Results: {{filter.qs.count}}</p>
+    <table class="table table-condensed table-striped table-nonfluid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Project</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Juvenile</th>
+      <th>Has Eggs</th>
+      <th>Quality</th>
+      <th>Labeled</th>
+      <th>Coord Type</th>
+      <th># Points</th>
+      <th>Image</th>
+      <th>Disabled</th>
+      <th>Operator</th>
+      <th>Created</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+      <tbody>
+    {% for image in filter.qs %}
+    <tr{% if image.disabled %} class="danger"{% endif %}>
+      <td><a href="{% url 'image:detail' image.id %}">{{ image.id }}</a></td>
+      <td>{{ image.project|default:"---" }}</td>
+      <td>{{ image.name }}</td>
+      <td>{{ image.date|default:"---" }}</td>
+      <td>{{ image.location|default:"---" }}</td>
+      <td>{{ image.juvenile|yesno }}</td>
+      <td>{{ image.has_eggs|yesno }}</td>
+      <td>{{ image.get_quality_display }}</td>
+      <td>{{ image.is_labeled|yesno }}</td>
+      <td>{{ image.coord_type }}</td>
+      <td>{{ image.points.count }}</td>
+      <td>{{ image.image }}</td>
+      <td>{{ image.disabled|yesno }}</td>
+      <td>{{ image.operator }}</td>
+      <td>{{ image.created }}</td>
+      <td>{{ image.comment }}</td>
+    </tr>
+    {% endfor %}
+      <tbody>
+    </table>
+    
+  </div>
+</div>    
+{% endif %}
+
+{% endblock %}

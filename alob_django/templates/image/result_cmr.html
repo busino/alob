@@ -1,0 +1,101 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Image Result{% endblock %}
+
+{% block content %}
+
+<style>
+div.vertical
+{
+ margin-left: -48px;
+ position: absolute;
+ width: 124px;
+ transform: rotate(-90deg);
+ -webkit-transform: rotate(-90deg); /* Safari/Chrome */
+ -moz-transform: rotate(-90deg); /* Firefox */
+ -o-transform: rotate(-90deg); /* Opera */
+ -ms-transform: rotate(-90deg); /* IE 9 */
+}
+
+th.vertical
+{
+ height: 120px;
+ line-height: 16px;
+ padding-bottom: 24px;
+ text-align: left;
+}
+
+table, th, td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+td { 
+    padding: 10px;
+}
+
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Alob Capture-Mark-Recapture</h1>
+    </div>
+</div>
+
+<div> 
+<ul class="nav nav-pills">
+  <li><a href="{% url 'image:result' %}">Image Results</a></li>
+  <li class="active"><a href="">Capture-Mark-Recapture</a></li>
+</ul>
+
+{% if data %}
+<br>
+
+<p>Num Individuals: {{ data|length }}, Num Images: {{ num_images }} <a href="?export" class="btn btn-primary">{% download %} Export Table</a></p>
+
+<b>Legend</b>
+<ul>
+{% for v in locations_legend %}
+  <li>{{ v.0 }}: {{ v.1 }}</li>
+{% endfor %}
+</ul>
+
+
+{% for v in data %}
+
+  {% if forloop.first %}
+<table>
+<thead>
+  <tr>
+    {% for h in v%}
+    <th class="vertical"><div class="vertical">{{ h }}</div></th>
+    {% endfor %}
+  </tr>
+</thead>
+<tbody>
+  {% elif forloop.last %}
+</tbody>
+</table>
+  {% else %}
+  <tr>
+    {% for h in v%}
+    {% if forloop.first %}
+    <td{% if h != '0' %} style="background-color: yellow;"{% endif %}><a href="{% url 'image:detail' h %}">{{ h }}</a></td>
+    {% else %}
+    <td{% if h != '0' %} style="background-color: yellow;"{% endif %}>{{ h }}</td>
+    {% endif %}
+    {% endfor %}
+  </tr>
+  {% endif %}
+{% endfor %}
+
+{% else %}
+<p>No Images available.</p>
+{% endif %} 
+
+</div>
+
+{% endblock %}

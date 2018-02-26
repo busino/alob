@@ -1,0 +1,122 @@
+{% extends "pair/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Pairs{% endblock %} 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Alob Pair List</h1>
+    </div>
+</div>
+
+{% if log %}
+<h2>Log</h2>
+<pre>{{ log }}</pre>
+{% endif %}
+
+{% if object_list %}
+
+<table id="list" class="table table-condensed table-nonfluid">
+  <caption>Num Pairs: {{ object_list.count }} of {{ paginator.count }}</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First</th>
+      <th>#Points</th>
+      <th>Second</th>
+      <th>#Points</th>
+      <th>Result</th>
+      <th>Match</th>
+      <th></th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for pair in object_list %}
+    <tr>
+        <td><a href="{% url 'pair:detail' pair.id %}">{{ pair.id }}</a></td>
+        <td{% if pair.first.disabled %} class="danger"{% endif %}>
+          <div style="display: flex;">
+            <div><a href="{% url 'image:detail' pair.first_id %}" style="float: left;">{{ pair.first.name }}</a></div>&nbsp;
+            <div class="image_opener_td" style="float: right;"><input type="hidden" value="{% url 'image:marked_image_jpeg' pair.first_id %}"><a id="hover" href="#">{% show color='lightgray' %}</a></div>
+          </div>
+        </td>
+        <td>{{ pair.first.points.count }}</td>
+        <td{% if pair.second.disabled %} class="danger"{% endif %}>
+          <div style="display: flex;">
+            <div><a href="{% url 'image:detail' pair.second_id %}" style="float: left;">{{ pair.second.name }}</a></div>&nbsp;
+            <div class="image_opener_td" style="float: right;"><input type="hidden" value="{% url 'image:marked_image_jpeg' pair.second_id %}"><a id="hover" href="#">{% show color='lightgray' %}</a></div>
+          </div>
+        </td>
+        <td>{{ pair.second.points.count }}</td>
+        <td style="background-color: {{ pair.result|red }}">{{ pair.result|floatformat:2 }}</td>
+        <td id="match_val" class="match_{{ pair.match|lower }}">{{ pair.get_match_display }}</td>
+        <td>
+          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+            <button value="{{pair.id}}" id="match" type="button" class="btn btn-default" title="Image Pair is a match.">Match</button>
+            <button value="{{pair.id}}" id="no_match" type="button" class="btn btn-default" title="Image pair is not match.">No Match</button>
+            <button value="{{pair.id}}" id="undefined_match" type="button" class="btn btn-default" title="Undefined">Undef.</button>
+          </div>
+        </td>
+        <td title="{{ pair.comment }}">{{ pair.comment|truncatechars:32 }}</td>
+    </tr>
+    {% endfor %}
+   </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    $("#list").tablesorter();
+    
+    $('button[id$="match"]').click(function() {
+        var url = '/pair/' + $(this).val() + '/update/';
+        var btn = $(this);
+        if (btn.attr('id') == 'match') {
+        	data = {'match': 1};
+        }
+        else if (btn.attr('id') == 'no_match') {
+            data = {'match': 0};
+        }
+        else if (btn.attr('id') == 'undefined_match') {
+            data = {'match': -1};
+        }
+        $.ajax({url: url,
+                data: data,
+                success: function(data) {
+                    console.log('Done.');
+                    console.log(data);
+                    btn.parents('tr').find("#match_val")
+                       .removeClass()
+                       .addClass('match_'+data['match'])
+                       .text(data['match']);
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Failed.');
+                }
+         });
+    });
+    
+    $( ".image_opener_td > a" ).click(function(event) {
+        event.preventDefault();
+    	show_image_td(this);
+    });
+    
+    
+});
+
+</script>
+
+  {% if is_paginated %}
+    {% include "paginate.html" with page_obj=page_obj paginator=paginator %}
+  {% endif %}
+
+{% else %}
+    <p>No Pairs available.</p>
+{% endif %} 
+
+{% endblock %}

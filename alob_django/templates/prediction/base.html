@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Prediction{% endblock %}
+
+{% block sub_navigation %}
+    <ul class="nav active" id="side-menu">
+        <li><a href="{% url 'prediction:index' %}" title="Prediction List">{% tlist %} List</a></li>
+        <li><a href="{% url 'prediction:create' %}" title="Create New Prediction">{% new %} Create</a></li>
+    {% block extra_sub_navigation %}{% endblock %}
+    </ul>
+{% endblock %}

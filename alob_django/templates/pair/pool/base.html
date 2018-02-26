@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Pair Pools{% endblock %}
+
+{% block sub_navigation %}
+    <ul class="nav active" id="side-menu">
+        <li><a href="{% url 'pair:pool:index' %}" title="Pair Pool List">{% tlist %} List</a></li>
+        <li><a href="{% url 'pair:pool:create' %}" title="Pair Pool Create">{% new %} Create</a></li>
+        {% block extra_sub_navigation %}{% endblock %}
+    </ul>
+{% endblock %}

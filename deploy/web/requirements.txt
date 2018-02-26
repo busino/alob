@@ -1,0 +1,13 @@
+django==1.11
+django-extensions
+django-bootstrap3
+django-filter
+django-settings-export
+xlrd
+xlsxwriter
+sphinx
+psutil
+mysqlclient
+gunicorn
+colorlog
+pytz

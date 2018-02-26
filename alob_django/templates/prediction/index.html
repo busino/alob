@@ -1,0 +1,58 @@
+{% extends "./base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Prediction{% endblock %} 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Alob Prediction List</h1>
+    </div>
+</div>
+
+{% if object_list %}
+
+<table id="list" class="table table-condensed table-nonfluid">
+  <caption>#: {{ object_list.count }}</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Status</th>
+      <th>Started</th>
+      <th>Ended</th>
+      <th># Matches</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in object_list %}
+    <tr>
+        <td><a href="{% url 'prediction:detail' obj.id %}">{{ obj.id }}</a></td>
+        <td><a href="{% url 'prediction:detail' obj.id %}">{{ obj.name }}</a></td>
+        <td>{{ obj.created }}</td>
+        <td{% if obj.status == 'failed' %} class="danger"{% endif %}>{{ obj.status }}</td>
+        <td>{{ obj.started }}</td>
+        <td>{{ obj.ended }}</td>
+        <td align="right">{{ obj.num_predictions }}</td>
+    </tr>
+    {% endfor %}
+   </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#list").tablesorter();
+});
+
+</script>
+
+
+{% else %}
+    <p>No Predictions Available.</p>
+{% endif %} 
+
+{% endblock %}

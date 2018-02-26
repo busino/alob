@@ -1,0 +1,93 @@
+﻿{% load staticfiles %}
+{% static "" as STATIC_URL %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <title>Alob - {% block title %}{% endblock %}</title>
+  <link rel="shortcut icon" href="{% static 'images/icon.png' %}">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/css/bokeh.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/css/bokeh-widgets.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/css/bokeh-tables.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{{ settings.BOOTSTRAP_DIR }}/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{{ settings.FONT_AWESOME_DIR }}/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  {% block extrastylesheet %}
+  {% endblock %}
+  <script type="text/javascript" src="{% static settings.JQUERY %}"></script>
+  <script type="text/javascript" src="{% static settings.JQUERY_TABLESORTER %}"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/js/bokeh.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/js/bokeh-widgets.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/js/bokeh-tables.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/js/bokeh-api.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOKEH_DIR }}/js/bokeh-gl.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}{{ settings.BOOTSTRAP_DIR }}/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/alob.js' %}"></script>
+  {% block extrajs %}{% endblock %} 
+  {% block extrastyle %}{% endblock %}
+</head>
+<body>
+
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" id="navbar-header" role="navigation" style="margin-bottom: 0">
+            <!-- Header-Navigation-Toggle -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+                <a class="navbar-brand" href="/" id="navbar-header"></a>
+            </div>
+           {% block navigation %}
+            <ul class="nav nav-tabs navbar-top-links navbar-left">
+              <!-- Image -->
+              <li class="header-nav-item{% if '/image/' in request.path  %} active{% endif %}">
+                <a href="{% url 'image:index' %}" title="Alob Images">Image</a>
+              </li>
+              <!-- Pair -->
+              <li class="header-nav-item{% if '/pair/' in request.path  %} active{% endif %}">
+                <a href="{% url 'pair:index' %}" title="Alob Pairs">Pair</a>
+              </li>
+              <!-- ML -->
+              <li class="header-nav-item{% if '/prediction/' in request.path  %} active{% endif %}">
+                <a href="{% url 'prediction:index' %}" title="Prediction">Prediction</a>
+              </li>
+              <!-- Documentation -->
+              <li class="header-nav-item{% if '/docs/' in request.path  %} active{% endif %}">
+                <a href="{% url 'docs:index' %}" title="Documentation">Documentation</a>
+              </li>
+            </ul>
+            {% endblock %}
+            <!-- Header-Navigation-Right -->
+            {% block main_navigation %}
+        <div class="main_navigation_title">
+          <strong>Alytes obstetricans - Mustererkennung</strong>
+          <img src="{% static 'images/icon_bg.png' %}">
+        </div>
+            {% endblock %}
+            
+            <!-- Sub-Navigation -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav">            
+            {% block sub_navigation %}
+            {% endblock %}
+                </div>
+            </div>
+
+        </nav>
+        <div id="page-wrapper">
+        {% block content %}
+        {% endblock %}
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+
+<footer>
+Author: <a href="mailto:raphael.walker@busino.ch">R.Walker</a> 2017
+</footer>
+
+</body>
+</html>

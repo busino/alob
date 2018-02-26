@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Documentation{% endblock %}
+{% block extrastyle %}
+<style>
+p {
+  font-size: 16px;
+}
+</style>
+{% endblock %}
+
+{% block sub_navigation %}
+<ul class="nav" id="side-menu">
+    <li><a href="{% url 'docs:index' %}" title="Index">Index</a></li>
+    <li><a href="{% url 'docs:site' 'about' %}" title="About The Project">About</a></li>
+    <li><a href="{% url 'docs:site' 'getting_started' %}" title="Getting Started">Getting Started</a></li>
+    <li><a href="{% url 'docs:site' 'devel' %}" title="Development Setup">Devel</a></li>
+    <li><a href="{% url 'docs:site' 'deploy' %}" title="Index">Deploy</a></li>
+    <li><a href="{% url 'docs:site' 'software' %}" title="Index">Software</a></li>
+    {% block extra_sub_navigation %}
+    {% endblock %}
+</ul>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-6">
+
+{{ rst_content|rst }}
+
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,88 @@
+{% extends "./base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Prediction: {{ object.id }}{% if object.name %} - {{ object.name }}{% endif %}{% endblock %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ object.id }}{% if object.name %} - {{ object.name }}{% endif %}</h1>
+    </div>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Created:</dt><dd>{{ object.created }}</dd>
+  <dt>Status:</dt><dd>{{ object.status }}</dd>
+{% if object.status == 'running' %}
+  <dt>PID:</dt><dd>{{ object.pid }} <i title="Is the process with PID really running?">({{ really_running|yesno }})</i></dd>
+  <dt>Running since:</dt><dd>{{ object.started|timesince }}</dd>  
+  <dt>Time left:</dt><dd>{{ time_left|timedelta }}</dd>
+{% endif %}
+  <dt>Started:</dt><dd>{{ object.started }}</dd>
+{% if object.status == 'finished' %}  
+  <dt>Ended:</dt><dd>{{ object.ended }}</dd>
+  <dt>Time used:</dt><dd>{{ time_used }} sec</dd>
+{% endif %}
+  <dt>Pools:</dt>
+  <dd>
+  {% for pool in object.pools.all %}
+  <a href="{% url 'image:pool:detail' pool.id%}">{{ pool.name }}</a> ({{ pool.images.count }})<br>
+  {% endfor %}
+  </dd>
+</dl>
+
+<div class="row">
+  <a class="btn btn-link" href="{% url 'prediction:delete' object.id %}">{% delete %} Delete</a>
+  <a class="btn btn-link" href="{% url 'prediction:update' object.id %}">{% edit %} Edit</a>
+  <a class="btn btn-link" href="">{% refresh %} Refresh</a>
+</div>
+
+<pre>
+#Images: {{ num_images }}
+Combinations: {{ num_combinations }}
+Num. Processes: {{ num_procs }}
+Time approx: {{ approx_calc_time }}
+</pre>
+
+<div class="row">
+{% if object.status != 'running' %}
+  <a class="btn btn-default" href="{% url 'prediction:start' object.id %}">{% play %} Start</a>
+{% else %}
+  <a class="btn btn-default" href="{% url 'prediction:stop' object.id %}">{% stop %} Stop</a>
+{% endif %}
+
+</div>
+
+{% if object.status == 'finished' %}
+
+<h2>Matches</h2>
+
+<pre>
+TP: {{ tp }}
+FP: {{ fp }}
+TN: {{ tn }}
+FN: {{ fn }}
+</pre>
+
+<table class="table table-condensed table-striped table-nonfluid table-hover">
+  <caption>#Matches: {{matches.count}}</caption>
+  <tr>
+    <th>Pair</th>
+    <th>Match</th>
+    <th>Name</th>
+    <th>Name</th>
+  </tr>
+{% for p in matches %}
+  <tr>
+    <td><a href="{% url 'pair:detail' p.id %}">{% pair %}</a></td>
+    <td>{{ p.match }}</td>
+    <td>{{ p.first.name }}</td>
+    <td>{{ p.second.name }}</td>
+  </tr>
+{% endfor %}  
+</table>
+{% endif %}
+
+{% endblock %}

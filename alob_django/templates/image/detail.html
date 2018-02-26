@@ -1,0 +1,175 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Image: {{ image.id }}{% endblock %} 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ image.id }} - {{ image.name }}</h1>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3">
+
+<dl class="dl-horizontal{% if image.disabled %} bg-danger{% endif %}">
+  <dt>Name:</dt><dd> {{ image.name }}</dd>
+  <dt>Image:</dt><dd> {{ image.image.name }}</dd>
+  <dt>Date:</dt><dd> {{ image.date }}</dd>
+  <dt>Project:</dt><dd> {{ image.project }}</dd>
+  <dt>Created:</dt><dd> {{ image.created }}</dd>
+  <dt>Labeled:</dt><dd><font{% if not image.is_labeled %} class="alert-danger"{% endif %}> {{ image.is_labeled|yesno }}</font></dd>
+  <dt>Disabled:</dt><dd> {{ image.disabled|yesno }}</dd>
+  <dt>Pools:</dt><dd>{% for p in image.pools.all %} <a href="{% url 'image:pool:detail' p.id %}">{{ p.name }}</a><br>{% endfor %}</dd>
+</dl>
+  </div>
+  <div class="col-lg-2">
+<dl class="dl-horizontal{% if image.disabled %} bg-danger{% endif %}">
+  <dt>Location:</dt><dd> {{ image.location }}</dd>
+  <dt>Juvenile:</dt><dd> {{ image.juvenile|yesno }}</dd>
+  <dt>Has Eggs:</dt><dd> {{ image.has_eggs|yesno }}</dd>
+  <dt>Operator:</dt><dd> {{ image.operator }}</dd>
+  <dt>Quality:</dt><dd> {{ image.get_quality_display }}</dd>
+  <dt>Coord System Type:</dt><dd> {{ image.coord_type }}</dd>
+  <dt>Num Points:</dt><dd> {{ image.num_points }}</dd>
+</dl>
+  </div>
+  <div class="col-lg-4">
+<dl class="dl-horizontal">
+  <dt>Comment:</dt><dd><pre>{{ image.comment }}</pre></dd>
+</dl>
+  </div>
+</div>
+
+<div class="row">
+  <a class="btn btn-default" href="{% url 'image:update' object.id %}?next={{ request.path }}">{% edit %} Edit</a>
+  <a class="btn btn-default" href="{% url 'image:delete' object.id %}">{% delete %} Delete</a>
+  <a class="btn btn-default" href="{% url 'image:label' object.id %}?next={{ request.path }}">{% label %} Label</a>
+  <a class="btn btn-default" href="{% url 'image:rotate' object.id %}" title="Rotate Image 180 degrees">{% edit %} Rotate</a>
+</div>
+
+<h2>Matches</h2>
+{% if matches %}
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    $( ".image_opener > a" ).click(function(e) {
+        e.preventDefault();
+        show_image(this, 800);
+     });
+
+});
+  
+</script>
+
+<table class="table table-striped table-condensed table-nonfluid">
+<tr>
+  <th>Image</th>
+  <th>Date</th>
+  <th>Pair</th>
+  <th>Pools</th>
+  <th>Image</th>
+</tr>
+{% for pair,image in matches %}
+<tr>
+  <td><a href="{% url 'image:detail' image.id%}">{{ image.name }}</a></td>
+  <td>{{ image.date }}</td>
+  <td><a href="{% url 'pair:detail' pair.id%}">Pair</a></td>
+  <td>
+  {% for pool in image.pools.all %}
+    <a href="{% url 'image:pool:detail' pool.id %}">{{ pool.name }}</a><br>
+  {% endfor %}
+  </td>
+  <td><div class="image_opener"><input type="hidden" value="{% url 'image:marked_image_jpeg' image.id 800 %}?small"><a id="hover" href="#">{% show color='lightgray' %}</a></div></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No matches.</p>
+{% endif %}
+
+
+<h2>Points</h2>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#list").tablesorter();
+});
+</script>
+
+{% if image.points.exists %}
+<div style="width: 100%;">
+
+<div style="width: 280px; float: left; margin-right: 20px; ">
+
+<div id="table" style="overflow-y: auto; height: 600px;">
+
+<table id="list" class="table table-condensed table-hover">
+  <thead>  
+    <tr>
+      <th>ID</th>
+      <th>x</th>
+      <th>y</th>
+      <th>type</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for point in image.points.all %}
+  <tr>
+    <td>{{ point.id }}</td>
+    <td align="right">{{ point.x|floatformat }}</td>
+    <td align="right">{{ point.y|floatformat }}</td>
+    <td>{{ point.type }}</td>
+    <td><a href="{% url 'image:point_delete' point.pk %}">{% delete %}</a></td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+<br>
+<a class="btn btn-default" href="{% url 'image:delete_points' image.pk %}">Delete All Points{% delete %}</a>
+
+</div>
+
+
+
+<div class="bk-root" style="margin-left: 360px;">
+    {{ plot_div|safe }}
+    {{ plot_js|safe }}
+</div>
+
+</div>
+
+<div style="clear: both;"></div>
+
+{% else %}
+<p>No Points defined.</p>
+{% endif %}
+
+<h2>Image</h2>
+
+{% if image.marked_image is not None %}
+<p>
+<img width="1000" src="{% url 'image:marked_image_jpeg' image.pk %}">
+</p>
+{% else %}
+<p class="alert alert-danger">Marked Image not available.</p>
+{% endif %}
+
+{% if image.img is not None %}
+<p>
+<img width="1000" src="{% url 'image:image_jpeg' image.pk %}">
+</p>
+{% else %}
+<p class="alert alert-danger">Image not available.</p>
+{% endif %}
+
+{% endblock %}

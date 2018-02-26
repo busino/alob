@@ -1,0 +1,253 @@
+/*
+ * Alob Project
+ * 2016
+ * Author(s): R.Walker
+ */
+
+/******************************************************************************
+ * Elements
+ ******************************************************************************/
+body {
+  background-color: #f8f8f8;
+}
+
+.h1, h1 {
+    font-size: 30px;
+}
+.h2, h2 {
+    font-size: 24px;
+}
+
+#page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: white;
+}
+@media (min-width: 768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 160px;
+    padding: 0 30px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+.navbar-top-links {
+  margin-right: 0;
+}
+.navbar-top-links li {
+  display: inline-block;
+}
+.navbar-top-links li:last-child {
+  margin-right: 15px;
+}
+.navbar-top-links li a {
+  padding: 15px 30px;
+  font-size: 1.1em;
+}
+.navbar-top-links .dropdown-menu li {
+  display: block;
+}
+.navbar-top-links .dropdown-menu li:last-child {
+  margin-right: 0;
+}
+.navbar-top-links .dropdown-menu li a {
+  padding: 3px 20px;
+  min-height: 0;
+}
+.navbar-top-links .dropdown-menu li a div {
+  white-space: normal;
+}
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+  width: 310px;
+  min-width: 0;
+}
+.navbar-top-links .dropdown-messages {
+  margin-left: 5px;
+}
+.navbar-top-links .dropdown-tasks {
+  margin-left: -59px;
+}
+.navbar-top-links .dropdown-alerts {
+  margin-left: -123px;
+}
+.navbar-top-links .dropdown-user {
+  right: 0;
+  left: auto;
+}
+.sidebar ul li {
+  border-bottom: 1px solid #e7e7e7;
+}
+.sidebar ul li a.active {
+  background-color: #eeeeee;
+}
+.sidebar .nav-second-level li,
+.sidebar .nav-third-level li {
+  border-bottom: none !important;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 160px;
+    margin-top: 51px;
+  }
+  .navbar-top-links .dropdown-messages,
+  .navbar-top-links .dropdown-tasks,
+  .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+}
+
+a.navbar-brand {
+    min-width: 400px;
+}
+
+
+.nav-tabs {
+    border-bottom: none !important;
+}
+
+ 
+footer {
+	text-align: right;
+}
+/******************************************************************************
+ * Bokeh plots
+ ******************************************************************************/
+.btn-space {
+	 margin: 12px;
+}
+
+/******************************************************************************
+ * Titles
+ ******************************************************************************/
+.page-header {
+    padding-bottom: 9px;
+    margin: 20px 0 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/******************************************************************************
+ * List
+ ******************************************************************************/
+ul li {
+    list-style: none;
+}
+
+ul {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+div.main_navigation_container {
+	float: left;
+}
+
+div.main_navigation_title {
+	float: right;
+	margin-right: 2%;
+	margin-top: 6px;
+}
+
+ul.main_navigation {
+    margin-bottom: 16px;
+    margin-left: 160px;
+}
+
+ul.main_navigation li {
+    display: inline;
+    margin-left: 18px;
+    border: 1px solid white;
+    padding: 8px;
+    padding-bottom: 7px;
+    min-width: 140px;
+    border: 2px;
+    border-color: #d1d1d1;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+ul.main_navigation li.active {
+    background-color: lightblue;
+}
+
+ul.main_navigation li.spacer {
+    border: None;
+}
+
+div#sub_navigation ul li.placeholder {
+    border: 0px solid white;
+}
+
+div#sub_navigation ul li {
+    margin-top: 12px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 6px;
+    border: 2px;
+    border-color: #d1d1d1;
+    border-style: solid;
+    border-radius: 8px;
+}
+
+/******************************************************************************
+ * Links
+ ******************************************************************************/
+a {
+    color: #0668cb;
+    text-decoration: none;
+}
+
+a span {
+    color: black;
+    text-decoration: none;
+}
+
+/******************************************************************************
+ * Tables
+ ******************************************************************************/
+
+.table-nonfluid {
+   width: auto !important;
+}
+
+.table-condensed > tbody > tr > td {
+    padding: 2px;
+}
+
+.match_1 {
+    background-color: white;
+}
+
+.match_none {
+    background-color: white;
+}
+.match_null {
+    background-color: white;
+}
+.match_-1 {
+    background-color: yellow;
+}
+.match_false, .match_0 {
+    background-color: red;
+}
+.match_true, .match_1 {
+    background-color: lime;
+}
+
+.alert.sm {
+  margin-bottom: 4px;
+  padding:6px 12px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #3c763d;
+    background-color:#dff0d8;
+    font-size: 1.12em;
+}
+.nav-pills > li > a, .nav-pills > li > a:hover, .nav-pills > li > a:focus {
+    color: #23527c;
+    background-color: #f8f8f8;
+}

@@ -1,0 +1,52 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Image: {{ image.id }}{% endblock %} 
+
+{% block content %}
+<script type="text/javascript">
+var CSRF_TOKEN = "{{ csrf_token }}";
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header {% if not image.is_labeled %} alert-danger{% endif %}">{{ image.id }} - {{ image.name }}{% if not image.is_labeled %} not labeled{% endif %}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+<div class="bk-root">
+    {{ plot_div|safe }}
+    {{ plot_js|safe }}
+</div>
+
+  </div>
+</div>
+
+{% if next and previous %}
+<div class="row">
+  <div class="col-lg-12">
+
+<ul class="pagination">
+  <li class="">
+    <span><a href="{{ previous }}">{% previous %}</a></span>
+  </li>
+  <li>
+    <span>Label</span>
+  </li>
+  <li>
+    <span><a href="{{ next }}">{% next %}</a></span>
+  </li>
+</ul>
+
+
+  </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

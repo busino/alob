@@ -1,0 +1,51 @@
+{% extends "image/pool/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Image Pools{% endblock %} 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{% pool %} Alob Image Pools</h1>
+    </div>
+</div>
+
+<a class="btn btn-sm btn-default" href="{% url 'image:pool:create' %}">{% add %} Create Pool</a>
+
+{% if object_list %}
+
+
+<table id="list" class="table table-hover table-condensed table-nonfluid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Comment</th>
+      <th># Images</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in object_list %}
+    <tr>
+        <td><a href="{% url 'image:pool:detail' obj.id %}">{{ obj.id }}</a></td>
+        <td>{{ obj.name }}</td>
+        <td title="{{ obj.comment }}">{{ obj.comment|truncatechars:32 }}</td>
+        <td>{{ obj.images.count }}</td>
+        <td><a class="btn btn-xs btn-link" href="{% url 'image:pool:update' obj.id %}">{% edit %}</a></td>
+        <td><a class="btn btn-xs btn-link" href="{% url 'image:pool:delete' obj.id %}">{% delete %}</a></td>
+    </tr>
+    {% endfor %}
+   </tbody>
+</table>
+
+
+{% else %}
+    <p>No Image Pools available.</p>
+{% endif %} 
+
+{% endblock %}

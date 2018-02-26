@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Images{% endblock %}
+
+{% block sub_navigation %}
+
+<ul class="nav" id="side-menu">
+    <li><a href="{% url 'image:index' %}" title="Image List">{% tlist %} List</a></li>
+    <li><a href="{% url 'image:filter' %}" title="Image List">{% search %} Search</a></li>
+    <li><a href="{% url 'image:pool:index' %}" title="Image Pools">{% pool %} Pools</a></li>
+    <li><a href="{% url 'image:result' %}" title="Image Match Results">{% tlist %} Results</a></li>
+    <li><a href="{% url 'image:create' %}" title="Create New Image">{% new %} Create</a></li>
+    <li><a href="{% url 'image:import_excel' %}" title="Import Images">{% import_tag %} Import</a></li>
+    {% block extra_sub_navigation %}
+    {% endblock %}
+</ul>
+{% endblock %}

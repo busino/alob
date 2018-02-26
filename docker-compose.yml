@@ -1,0 +1,39 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: alob
+      MYSQL_DATABASE: alob
+      MYSQL_USER: alob
+      MYSQL_PASSWORD: alob
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./log:/log
+  web:
+    build: deploy/web
+    command: /opt/conda/bin/gunicorn alob_django.wsgi:application --log-level debug --capture-output --log-file /log/web.log -w 2 -b :8008
+    volumes:
+      - ./:/src
+      - ./log:/log
+    working_dir: /src/alob_django
+    ports:
+      - "8008:8008"
+    expose:
+      - "8008"
+    depends_on:
+      - db
+    environment:
+      - PYTHONPATH=/src
+      - LANG=C.UTF-8
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - ./alob_django/static:/static
+      - ./deploy/nginx/conf.d:/etc/nginx/conf.d
+      - ./deploy/nginx/auth:/etc/nginx/auth
+      - ./log:/log
+    ports:
+      - "80:80"
+    depends_on:
+      - web

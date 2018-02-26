@@ -1,0 +1,135 @@
+{% extends "pair/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Pair: {{ pair.id }}{% endblock %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{{ pair.id }}</h1>
+    </div>
+</div>
+
+<div style="width: 100%;">
+
+<div id="table" style="width: 480px; float: left; margin-right: 20px;">
+
+<style>
+.dl-horizontal dt {
+  width: 112px;
+}
+.dl-horizontal dd {
+  margin-left: 120px;
+}
+</style>
+
+<dl class="dl-horizontal">
+  <dt>First:</dt><dd{% if pair.first.disabled %} class="bg-danger"{% endif %}>
+                    <a href="{% url 'image:detail' pair.first_id %}"><span style="color: blue;">{{ pair.first.name }} ({{ pair.first.num_points }})</span></a>
+                    <a class="btn btn-xs btn-default" href="{% url 'image:label' pair.first_id %}">{% label %} Label</a>
+                 </dd>
+  <dt>Second:</dt><dd{% if pair.second.disabled %} class="bg-danger"{% endif %}>
+                    <a href="{% url 'image:detail' pair.second.id %}"><span style="color: red;">{{ pair.second.name }} ({{ pair.second.num_points }})</span></a>
+                    <a class="btn btn-xs btn-default" href="{% url 'image:label' pair.second_id %}">{% label %} Label</a>
+                 </dd>
+  <dt>Points:</dt><dd>{{ pair.first.num_points }} / {{ pair.second.num_points }} -> {{ diff_num_points }}</dd>
+  <dt>Result:</dt><dd>{{ pair.result }}</dd>
+  <dt>Search Radius:</dt><dd>{{ search_radius }}</dd>
+  <dt>Match:</dt>
+    <dd><p id="match_val" class="match_{{ pair.match|lower }}">{{ pair.get_match_display }}</p>
+          <div class="btn-group btn-group-xs" role="group" aria-label="...">
+            <button value="{{pair.id}}" id="match" type="button" class="btn btn-default" title="Image Pair is a match.">Match</button>
+            <button value="{{pair.id}}" id="no_match" type="button" class="btn btn-default" title="Image pair is not match.">No Match</button>
+            <button value="{{pair.id}}" id="undefined_match" type="button" class="btn btn-default" title="Undefined">Undef.</button>
+          </div>
+    </dd>
+  <dt>Comment</dt>
+  <dd>
+    <form method="post" action="{% url 'pair:comment' pair.id %}">{% csrf_token %}
+      <textarea name="comment" rows="3" cols="48">{{pair.comment}}</textarea>
+      <br>
+      <button class="btn btn-sm btn-default" type="submit">Update</button>
+    </form>
+  </dd>
+</dl>
+Time used: {{ time_used|floatformat:4 }}s<br>
+Match Points: {{ matches }}<br>
+Calculated Match Points: {{ calc_matches }}<br>
+Result: {{ result }}<br>
+Transformation Matrix: <pre>{{ transform }}</pre><br>
+<form method="get">
+      Search Radius: <input name="search_radius" type="text" value="{{ search_radius }}">
+      <button class="btn btn-sm btn-default" type="submit">Recalculate</button>
+      </form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    
+    $('button[id$="match"]').click(function() {
+        var url = '/pair/{{pair.id}}/update/';
+        var btn = $(this);
+        if (btn.attr('id') == 'match') {
+            data = {'match': 1};
+        }
+        else if (btn.attr('id') == 'no_match') {
+            data = {'match': 0};
+        }
+        else if (btn.attr('id') == 'undefined_match') {
+        	data = {'match': -1};
+        }
+        $.ajax({url: url,
+                data: data,
+                success: function(data) {
+                    console.log('Done.');
+                    console.log(data);
+                    $("p#match_val")
+                       .removeClass()
+                       .addClass('match_'+data['match'])
+                       .text(data['match']);
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Failed.');
+                }
+         });
+    });
+    
+    
+});
+</script>
+
+<div class="bk-root" style="margin-left: 520px;">
+    {{ plot_div|safe }}
+    {{ plot_js|safe }}
+</div>
+
+</div>
+
+<div style="clear: both"></div>
+
+<h2>Images</h2>
+
+<p>
+{% if pair.first.marked_image is not None %}
+<img style="border: 2px solid blue;" width="720px" src="{% url 'image:marked_image_jpeg' pair.first.pk %}">
+{% elif pair.first.jpeg_file is not None %}
+<img style="border: 2px solid blue;" width="720px" src="{% url 'image:image_jpeg' pair.first.pk %}">
+{% else %}
+<p>No Image available.</p>
+{% endif %}
+{% if pair.second.marked_image is not None %}
+<img style="border: 2px solid red;" width="720px" src="{% url 'image:marked_image_jpeg' pair.second.pk %}">
+{% elif pair.second.jpeg_file is not None %}
+<img style="border: 2px solid red;" width="720px" src="{% url 'image:image_jpeg' pair.second.pk %}">
+{% else %}
+<p>No Image available.</p>
+{% endif %}
+</p>
+{% if log %}
+<h2>Log</h2>
+<pre>{{ log }}</pre>
+{% endif %}
+
+{% endblock %}

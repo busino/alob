@@ -1,0 +1,12 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Image Pools{% endblock %}
+
+{% block extra_sub_navigation %}
+    <ul class="nav active" id="side-menu">
+        <li><a href="{% url 'image:pool:create' %}" title="Image Pool Create">{% new %} Create Pool</a></li>
+    </ul>
+{% endblock %}

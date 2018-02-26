@@ -1,0 +1,66 @@
+{% extends "./base.html" %}
+
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}Alob Pair Filter{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+
+<form action="" method="get">
+        
+{% bootstrap_form filter.form layout='horizontal' %}        
+<br>
+&nbsp;
+<br>      
+{% buttons %}
+{% bootstrap_button content=_("Search") button_type='submit' button_class='btn btn-primary' icon='search' %}
+{% endbuttons %}
+</form>
+
+
+  </div>
+</div>
+
+
+{% if object_list %}
+
+<div class="row">
+  <div class="col-md-8">
+    <p>Num Results: {{ object_list.count}}</p>
+    
+    <table class="table table-condensed table-striped table-nonfluid">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First</th>
+          <th>Second</th>
+          <th>Match</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for obj in object_list %}
+        <tr>
+          <td><a href="{% url 'pair:detail' obj.id %}">{{ obj.id }}</a></td>
+          <td><a href="{% url 'image:detail' obj.first_id %}">{{obj.first.name }}</a></td>
+          <td><a href="{% url 'image:detail' obj.second_id %}">{{obj.second.name }}</a></td>
+          <td class="match_{{ obj.match|lower }}">{{ obj.get_match_display }}</td>
+          <td title="{{ obj.comment }}">{{ obj.comment|truncatechars:16 }}</td>
+          <td>
+          {% for pool in obj.pools.all %}
+          {{ pool.name }}<br>
+          {% endfor %}
+          </td>
+        </tr>
+    {% endfor %}
+      <tbody>
+    </table>
+    
+  </div>
+</div>    
+{% endif %}
+
+{% endblock %}

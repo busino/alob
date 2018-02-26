@@ -1,0 +1,46 @@
+{% extends "pair/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Pair Pools{% endblock %} 
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">{% pool %} Alob Pair Pools</h1>
+    </div>
+</div>
+
+{% if object_list %}
+
+<table id="list" class="table table-hover table-condensed table-nonfluid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Comment</th>
+      <th># Pairs</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in object_list %}
+    <tr>
+        <td><a href="{% url 'pair:pool:detail' obj.id %}">{{ obj.id }}</a></td>
+        <td>{{ obj.name }}</td>
+        <td title="{{ obj.comment }}">{{ obj.comment|truncatechars:32 }}</td>
+        <td>{{ obj.pairs.count }}</td>
+        <td><a href="{% url 'pair:pool:update' obj.id %}">Edit</a></td>
+        <td><a href="{% url 'pair:pool:delete' obj.id %}">Del</a></td>
+    </tr>
+    {% endfor %}
+   </tbody>
+</table>
+
+
+{% else %}
+    <p>No Pair Pools available.</p>
+{% endif %} 
+
+{% endblock %}

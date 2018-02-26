@@ -1,0 +1,110 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Images{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Alob Image List</h1>
+    </div>
+</div>
+
+
+<style>
+.dl-horizontal dt {
+  width: 240px;
+}
+.dl-horizontal dd {
+  margin-left: 260px;
+}
+</style>
+
+<dl class="dl-horizontal">
+  <dt>Num Images:</dt><dd> {{ paginator.count }}</dd>
+  <dt>Total Num Points:</dt><dd> {{ points__count }}</dd>
+  <dt>Points per Image<br>(Min/Max/Mean/StdDev):</dt><dd> {{ points__count__min }} / {{ points__count__max }} / {{ points__count__avg|floatformat:2 }} / {{ points__count__stddev|floatformat:2 }} </dd>
+  <dt>Min Distances<br>(Min/Max/Mean/StdDev):</dt><dd>{{ min_distances_min }} / {{ min_distances_max }} / {{ min_distances_avg }} / {{ min_distances_stddev }}</dd>
+  <dt>Min/Max/Avg X</dt><dd>{{ x__min|floatformat:2 }} / {{ x__max|floatformat:2 }} / {{ x__avg|floatformat:2 }}</dd>
+  <dt>Min/Max/Avg Y</dt><dd>{{ y__min|floatformat:2 }} / {{ y__max|floatformat:2 }} / {{ y__avg|floatformat:2 }}</dd>
+</dl>
+
+
+{% if object_list %}
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("#list").tablesorter();
+
+    $( ".image_opener > a" ).click(function(e) {
+    	e.preventDefault();
+        show_image(this);
+     });
+
+});
+  
+</script>
+
+
+<table id="list" class="table table-striped table-condensed table-nonfluid">
+  <caption>Num Images: {{ object_list.count }} of {{ paginator.count }}</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Project</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Juvenile</th>
+      <th>Has Eggs</th>
+      <th>Quality</th>
+      <th>Labeled</th>
+      <th>Coord Type</th>
+      <th># Points</th>
+      <th>Image</th>
+      <th>Disabled</th>
+      <th>Operator</th>
+      <th>Created</th>
+      <th>Comment</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for image in object_list %}
+    <tr{% if image.disabled %} class="danger"{% endif %}>
+      <td><a href="{% url 'image:detail' image.id %}">{{ image.id }}</a></td>
+      <td>{{ image.project|default:"---" }}</td>
+      <td>{{ image.name }}</td>
+      <td>{{ image.date|default:"---" }}</td>
+      <td>{{ image.location|default:"---" }}</td>
+      <td>{{ image.juvenile|yesno }}</td>
+      <td>{{ image.has_eggs|yesno }}</td>
+      <td>{{ image.get_quality_display }}</td>
+      <td{% if not image.is_labeled %} class="alert-danger"{% endif %}>{{ image.is_labeled|yesno }}</td>
+      <td>{{ image.coord_type }}</td>
+      <td>{{ image.points.count }}</td>
+      <td>{{ image.image }}</td>
+      <td>{{ image.disabled|yesno }}</td>
+      <td>{{ image.operator }}</td>
+      <td>{{ image.created }}</td>
+      <td>{{ image.comment }}</td>
+      <td><div class="image_opener"><input type="hidden" value="{% url 'image:marked_image_jpeg' image.id %}"><a id="hover" href="#">{% show color='lightgray' %}</a></div></td>
+    </tr>
+    {% endfor %} 
+  </tbody>
+</table>
+
+  {% if is_paginated %}
+    {% include "paginate.html" with page_obj=page_obj paginator=paginator %}
+  {% endif %}
+
+
+{% else %}
+<p>No Images available.</p>
+{% endif %} 
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "image/base.html" %}
+
+{% load staticfiles %}
+{% load base %}
+
+{% block title %}Alob Image Result{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Alob Result List</h1>
+    </div>
+</div>
+
+<div> 
+<ul class="nav nav-pills">
+  <li class="active"><a href="">Image Results</a></li>
+  <li><a href="{% url 'image:result_cmr' %}">Capture-Mark-Recapture</a></li>
+</ul>
+
+{% if object_list %}
+<br>
+
+<p>Image with Matches: {{ object_list|length }} <a href="?csv" class="btn btn-primary">{% download %} Export CSV</a></p>
+
+<table class="table table-condensed table-nonfluid">
+<thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Matches (Name, Pool)</th>
+    <th>Days</th>
+  </tr>
+</thead>
+<tbody>
+{% for image in object_list %}
+  <tr>
+  {% ifchanged image.id %}
+    <td>{{ image.id }}</td>
+    <td><a href="{% url 'image:detail' image.id %}">{{ image.name }}</a></td>
+    <td>{{ image.date}}</td>
+  {% else %}
+     <td></td>
+     <td></td>
+     <td></td>
+  {% endifchanged %}
+    <td><a href="{% url 'image:detail' image.second_id %}">{{ image.name_second }}</a> - {{ image.date_second }}</td>
+    <td align="right">{{ image.time_diff }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+
+
+{% else %}
+<p>No Images available.</p>
+{% endif %} 
+
+</div>
+
+{% endblock %}

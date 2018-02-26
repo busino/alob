@@ -1,0 +1,26 @@
+name: alob_c_env_py3k
+dependencies:
+- python=3.6
+- bokeh
+- ipython
+- numpy
+- pandas
+#- scikit-learn=np111py35_2
+- scipy
+- xlrd
+- xlsxwriter
+- sphinx
+- django=1.11
+- scikit-image
+- scikit-learn
+- psutil
+#- gdal
+- pip:
+  - django-bootstrap3
+  - django-extensions
+  - django-filter
+  - django-settings-export
+  - joblib
+  # tensorflow-gpu
+  - mysqlclient
+

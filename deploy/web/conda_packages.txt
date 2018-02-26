@@ -1,0 +1,11 @@
+python==3.6
+bokeh==0.12.10
+nodejs==6.10.3
+numpy
+pandas
+scipy
+ipython
+scikit-image
+scikit-learn
+joblib
+pip
