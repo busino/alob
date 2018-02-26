@@ -11,7 +11,7 @@ import os
 #
 #
 
-DEPLOY_TYPE = 'local'#'production'# 'dev', 'local'
+DEPLOY_TYPE = 'production'#'production'# 'dev', 'local'
 
 SEARCH_RADIUS = 0.17
 
@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'alob_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'alob2',                      # Or path to database file if using sqlite3.
+        'NAME': 'alob',                      # Or path to database file if using sqlite3.
         'USER': 'alob',                     # Not used with sqlite3.
         'PASSWORD': 'alob',                  # Not used with sqlite3.
         'HOST': {'production': 'db', 'dev': 'db', 'local': ''}.get(DEPLOY_TYPE, 'db'),
