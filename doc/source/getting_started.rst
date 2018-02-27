@@ -1,21 +1,21 @@
-Über das Programm
+Ãœber das Programm
 =================
 
-Das Programm dient der Analyse von Punktmustern zur Wiedererkennung von Individuen der Geburtshelferkröte. 
+Das Programm dient der Analyse von Punktmustern zur Wiedererkennung von Individuen der GeburtshelferkrÃ¶te. 
 Typische Anwendungsbereichen des Programms sind Monitoring und Erfolgskontrolle,
-wenn mit Fang-Wiederfang Bestandesgrössen oder die Raumnutzung der Tiere bestimmt werden sollen.
+wenn mit Fang-Wiederfang BestandesgrÃ¶ssen oder die Raumnutzung der Tiere bestimmt werden sollen.
 
-Die automatisierte Vergleichsmethode basiert auf der Idee, dass die Positionen auffälliger 
-Punkte auf dem Körper der Tiere als Koordinaten direkt im Programm erfasst werden.
-Für jeden Paarvergleich der «Koordinaten-Muster» zweier Tiere wird eine Art Ähnlichkeitsindex berechnet.
-Je höher der Index, desto eher liegt ein Wiederfang desselben Tiers vor.
-Der Entscheid, ob es wirklich ein Wiederfang ist, wird von Auge gefällt. 
-Der Computer hilft mit, die Fälle mit grösster Wahrscheinlichkeit auszusortieren und verringert damit die Arbeitszeit. 
+Die automatisierte Vergleichsmethode basiert auf der Idee, dass die Positionen auffÃ¤lliger 
+Punkte auf dem KÃ¶rper der Tiere als Koordinaten direkt im Programm erfasst werden.
+FÃ¼r jeden Paarvergleich der Â«Koordinaten-MusterÂ» zweier Tiere wird eine Art Ã„hnlichkeitsindex berechnet.
+Je hÃ¶her der Index, desto eher liegt ein Wiederfang desselben Tiers vor.
+Der Entscheid, ob es wirklich ein Wiederfang ist, wird von Auge gefÃ¤llt. 
+Der Computer hilft mit, die FÃ¤lle mit grÃ¶sster Wahrscheinlichkeit auszusortieren und verringert damit die Arbeitszeit. 
 
-Das Programm wird auf einem Server installiert und kann über einen Browser geöffnet werden.
+Das Programm wird auf einem Server installiert und kann Ã¼ber einen Browser geÃ¶ffnet werden.
 Dadurch kann es von verschiedenen Nutzern gemeinsam verwendet werden.
-Im Programm implementiert ist eine Datenbank, welche Daten wie Fotos, Koordinaten der Warzen etc. enthält.
-Das Programm ist gratis zugänglich und dank ungeschütztem Quellcode auch durch Dritte erweiterbar (open source). 
+Im Programm implementiert ist eine Datenbank, welche Daten wie Fotos, Koordinaten der Warzen etc. enthÃ¤lt.
+Das Programm ist gratis zugÃ¤nglich und dank ungeschÃ¼tztem Quellcode auch durch Dritte erweiterbar (open source). 
 
 
 Installieren des Programms
@@ -24,57 +24,57 @@ Installieren des Programms
 .. raw:: html
     
     <p>
-    <a href="./deploy">Deploy</a> für die Installation eines Alob Server.<br>
-    <a href="./devel">Devel</a> für ein Setup zur Erweiterung und Test von Alob.
+    <a href="./deploy">Deploy</a> fÃ¼r die Installation eines Alob Server.<br>
+    <a href="./devel">Devel</a> fÃ¼r ein Setup zur Erweiterung und Test von Alob.
     </p>
 
-Qualitätsanforderungen Fotos
+QualitÃ¤tsanforderungen Fotos
 ----------------------------
 
 Das Programm funktioniert bereits mit unbearbeiteten Fotos. 
-Minimale Voraussetzung für die Anwendung sind Fotos mit demselben Ausschnitt, auf welchen die Punktmuster erkennbar sind.
-Die Trefferquote, dass ein zweites Foto als übereinstimmendes Tier erkannt wird,
-steigt jedoch mit der Qualität der Feldfotos.
+Minimale Voraussetzung fÃ¼r die Anwendung sind Fotos mit demselben Ausschnitt, auf welchen die Punktmuster erkennbar sind.
+Die Trefferquote, dass ein zweites Foto als Ã¼bereinstimmendes Tier erkannt wird,
+steigt jedoch mit der QualitÃ¤t der Feldfotos.
 **Wir empfehlen deshalb beim Fotografieren das Benutzen einer hellen Unterlage als Hintergrund, 
-eine starke, gleichmässige Beleuchtung und ein Stativ für die Kamera, damit stets derselbe Ausschnitt aus demselben Winkel aufgenommen wird.**
-Die Auflösung der Fotos sollte in etwa 1000x1000 Pixel betragen.
+eine starke, gleichmÃ¤ssige Beleuchtung und ein Stativ fÃ¼r die Kamera, damit stets derselbe Ausschnitt aus demselben Winkel aufgenommen wird.**
+Die AuflÃ¶sung der Fotos sollte in etwa 1000x1000 Pixel betragen.
 
 
 
 Import Fotos
 ------------
 
-Fotos können im Register *Image* über die Rubriken *Create* und *Import* in das Programm eingelesen werden:
+Fotos kÃ¶nnen im Register *Image* Ã¼ber die Rubriken *Create* und *Import* in das Programm eingelesen werden:
 
-Create: zum Einlesen von einzelnen Fotos. Dabei können zu jedem Foto Informationen hinzugefügt werden (s. Bearbeitung Fotos).
+Create: zum Einlesen von einzelnen Fotos. Dabei kÃ¶nnen zu jedem Foto Informationen hinzugefÃ¼gt werden (s. Bearbeitung Fotos).
 
-Import: Ordner: zum Einlesen von ganzen Fotoordnern. Die Informationen zu den Fotos können optional in einer Tabelle im Format .csv oder .xlsx hochgeladen werden.
+Import: Ordner: zum Einlesen von ganzen Fotoordnern. Die Informationen zu den Fotos kÃ¶nnen optional in einer Tabelle im Format .csv oder .xlsx hochgeladen werden.
 
 
 Fotos aufrufen
 --------------
 
-Jedes importierte Foto kann direkt mit dem Klick auf die ID-Nummer aufgerufen werden. Dabei werden die hinterlegten Informationen und das importierte Originalfoto angezeigt. Falls die Warzenmuster bereits digitalisiert wurden wird auch das bearbeitete Foto mit einer Tabelle und Grafik der Warzenmuster angefügt.
+Jedes importierte Foto kann direkt mit dem Klick auf die ID-Nummer aufgerufen werden. Dabei werden die hinterlegten Informationen und das importierte Originalfoto angezeigt. Falls die Warzenmuster bereits digitalisiert wurden wird auch das bearbeitete Foto mit einer Tabelle und Grafik der Warzenmuster angefÃ¼gt.
 
 
 Datenmanagement
 ---------------
 
-Unter dem Register *Image* können Fotos in verschiedene *Pools* gruppiert und abgespeichert werden.
-Dadurch können z.B. einzelne Fangdaten oder Untersuchungsgebiete separat oder direkt miteinander verglichen werden.
-Mit Anklicken des Feldes *Create Pool* oder direkt beim Anwählen der Rubrik *Create Pool* wird ein Fenster geöffnet,
-wo die Fotos ausgewählt und als Fotoordner abgespeichert werden können.
+Unter dem Register *Image* kÃ¶nnen Fotos in verschiedene *Pools* gruppiert und abgespeichert werden.
+Dadurch kÃ¶nnen z.B. einzelne Fangdaten oder Untersuchungsgebiete separat oder direkt miteinander verglichen werden.
+Mit Anklicken des Feldes *Create Pool* oder direkt beim AnwÃ¤hlen der Rubrik *Create Pool* wird ein Fenster geÃ¶ffnet,
+wo die Fotos ausgewÃ¤hlt und als Fotoordner abgespeichert werden kÃ¶nnen.
 
-In der Rubrik *Pools* werden die einzelnen Fotoordner dargestellt. Beim Klick auf die ID fasst das Programm die wichtigsten Informationen zusammen wie Anzahl enthaltener Fotos, allfälliger doppelter Fotos oder Matches. Die Matches und Fotos werden unten aufgelistet und können direkt aufgerufen und bearbeitet werden.
+In der Rubrik *Pools* werden die einzelnen Fotoordner dargestellt. Beim Klick auf die ID fasst das Programm die wichtigsten Informationen zusammen wie Anzahl enthaltener Fotos, allfÃ¤lliger doppelter Fotos oder Matches. Die Matches und Fotos werden unten aufgelistet und kÃ¶nnen direkt aufgerufen und bearbeitet werden.
 
 
 Bearbeitung Fotos
 -----------------
 Jedes importierte Foto kann direkt beim Import oder beim Klick auf die ID-Nummer bearbeitet werden.
 
-Folgende Möglichkeiten bestehen:
+Folgende MÃ¶glichkeiten bestehen:
 
-- Edit: Informationen zum Foto anfügen wie Datum, Untersuchungsgebiet/Fangort, Alter, Eier vorhanden, Bearbeiter, Fotoqualität (Foto kann bei schlechter Qualität mit Anklicken des Feldes Disabled aus der Analyse genommen werden), allgemeine Bemerkungen.
+- Edit: Informationen zum Foto anfÃ¼gen wie Datum, Untersuchungsgebiet/Fangort, Alter, Eier vorhanden, Bearbeiter, FotoqualitÃ¤t (Foto kann bei schlechter QualitÃ¤t mit Anklicken des Feldes Disabled aus der Analyse genommen werden), allgemeine Bemerkungen.
 - Label: Digitalisieren der Warzenmuster (s. unten)
 - Rotate: Drehen des Fotos. **Wir empfehlen die Fotos jeweils in derselben Rotation zu analysieren, z.B. Nase links bzw. Schwanz rechts.**
 
@@ -82,7 +82,7 @@ Folgende Möglichkeiten bestehen:
 Digitalisieren der Warzenmuster
 -------------------------------
 
-Die Warzenmuster der Fotos können über das Feld *Label* digitalisiert werden (via ID-Nummer des Fotos).
+Die Warzenmuster der Fotos kÃ¶nnen Ã¼ber das Feld *Label* digitalisiert werden (via ID-Nummer des Fotos).
 Es empfiehlt sich die Warzenpunkte mit Hilfe einer Maus zu setzen und nicht mit einem Trackpad.
 
 Punkte setzen:
@@ -91,9 +91,9 @@ Punkte setzen:
 *Neuer Punkt*:
     Doppelklick
 *Punkt bearbeiten*:
-    Punkt anwählen > verschieben > Klicken
-*Punkt löschen*:
-    Punkt anwählen > Eingabetaste Delete drücken
+    Punkt anwÃ¤hlen > verschieben > Klicken
+*Punkt lÃ¶schen*:
+    Punkt anwÃ¤hlen > Eingabetaste Delete drÃ¼cken
 
 Dabei ist die Reihenfolge der Punkte wichtig, welche bearbeitet werden:
 
@@ -103,87 +103,87 @@ Dabei ist die Reihenfolge der Punkte wichtig, welche bearbeitet werden:
 
 3. Punkt wird beim rechten Auge gesetzt (violetter Punkt)
 
-4. Punkt wird beim Schwanz gesetzt (blauer Punkt; falls dieser durch Eier überdeckt ist muss eine Annahme getroffen werden)
+4. Punkt wird beim Schwanz gesetzt (blauer Punkt; falls dieser durch Eier Ã¼berdeckt ist muss eine Annahme getroffen werden)
 
-5. Für alle charakteristischen Warzenmuster wird ein Punkt gesetzt (gelbe Punkte).
+5. FÃ¼r alle charakteristischen Warzenmuster wird ein Punkt gesetzt (gelbe Punkte).
 
 
 Die Koordinaten der gesetzten Punkte werden rechts in einer Tabelle zusammengefasst.
 
 Am Schluss wird die Digitalisierung mit *Save* beendet.
 
-Die Koordinatenpunkte können jederzeit bearbeitet oder gelöscht werden.
+Die Koordinatenpunkte kÃ¶nnen jederzeit bearbeitet oder gelÃ¶scht werden.
 
 
 Berechnen der Paarvergleiche
 ----------------------------
 
-Im Register *Prediction* werden in der Rubrik *Create* diejenigen Fotos ausgewählt und als Ordner abgespeichert, für welche ein Paarvergleich berechnet werden soll. 
-Unter *Start* wird die Analyse des Paarvergleichs durchgeführt. Die Resultate können anschliessend im Register *List* aufgerufen werden.
+Im Register *Prediction* werden in der Rubrik *Create* diejenigen Fotos ausgewÃ¤hlt und als Ordner abgespeichert, fÃ¼r welche ein Paarvergleich berechnet werden soll. 
+Unter *Start* wird die Analyse des Paarvergleichs durchgefÃ¼hrt. Die Resultate kÃ¶nnen anschliessend im Register *List* aufgerufen werden.
 
 Unter dem Titel *Matches* fasst das Programm die Resultate der Paarvergleiche innerhalb des jeweiligen Ordners zusammen: true positive =TP, false positive = FP, true negative = TN, false negative = FN. 
-- Die FP-Werte sollten von Hand noch einmal überprüft werden.
-- Der Paarvergleich funktioniert gut, wenn die FN-Werte klein sind. Dazu werden die Matches unten gerade aufgelistet und können direkt bearbeitet werden.
+- Die FP-Werte sollten von Hand noch einmal Ã¼berprÃ¼ft werden.
+- Der Paarvergleich funktioniert gut, wenn die FN-Werte klein sind. Dazu werden die Matches unten gerade aufgelistet und kÃ¶nnen direkt bearbeitet werden.
 
-Im Register *Pair* werden alle Paarvergleiche in Form einer Tabelle dargestellt, welche das Programm durchgeführt hat (unabhängig der Ordner).
+Im Register *Pair* werden alle Paarvergleiche in Form einer Tabelle dargestellt, welche das Programm durchgefÃ¼hrt hat (unabhÃ¤ngig der Ordner).
 Jede Zeile stellt ein Vergleich von Koordinatenmuster zweier Fotos dar. Geordnet wird die Tabelle nach dem vorhandensein eines *Matches*.
 
-In den Spalten werden die Fotonamen und Anzahl Punktkoordinaten pro Foto aufgeführt.
-In der Spalte *Result* wird der Ähnlichkeitsindex dargestellt.
+In den Spalten werden die Fotonamen und Anzahl Punktkoordinaten pro Foto aufgefÃ¼hrt.
+In der Spalte *Result* wird der Ã„hnlichkeitsindex dargestellt.
 
 
-Berechnung der Übereinstimmung
+Berechnung der Ãœbereinstimmung
 ------------------------------
 
-Die Warzenmuster werden von Hand digitalisiert und als Punktkoordinaten abgespeichert. Dabei entsteht für jedes Foto eine Punktwolke, welche mit einer Punktwolke eines zweiten Fotos übereinandergelegt werden kann. Um jeden Punkt der Referenzpunktwolke wird nun mit einem definierten Suchradius nach Nachbarpunkten gesucht. Alle Punkte im Suchradius sind Übereinstimmungen. Die Summe der Übereinstimmungen wird durch die kleinere Anzahl der Punkte der Punktwolken dividiert und ergibt das Übereinstimmungsresultat:
+Die Warzenmuster werden von Hand digitalisiert und als Punktkoordinaten abgespeichert. Dabei entsteht fÃ¼r jedes Foto eine Punktwolke, welche mit einer Punktwolke eines zweiten Fotos Ã¼bereinandergelegt werden kann. Um jeden Punkt der Referenzpunktwolke wird nun mit einem definierten Suchradius nach Nachbarpunkten gesucht. Alle Punkte im Suchradius sind Ãœbereinstimmungen. Die Summe der Ãœbereinstimmungen wird durch die kleinere Anzahl der Punkte der Punktwolken dividiert und ergibt das Ãœbereinstimmungsresultat:
 
 ::
 
-    result = Anzahl Übereinstimmungen / min(Anzahl Punkte der Punktwolken)
+    result = Anzahl Ãœbereinstimmungen / min(Anzahl Punkte der Punktwolken)
 
-Bei jedem Paarvergleich wird dieses Übereinstimmungsresultat im Feld Result dargestellt. Je höher der Wert von Result, desto besser die Übereinstimmung bzw. desto höher die Chance, dass es sich um identische Individuen handelt.
+Bei jedem Paarvergleich wird dieses Ãœbereinstimmungsresultat im Feld Result dargestellt. Je hÃ¶her der Wert von Result, desto besser die Ãœbereinstimmung bzw. desto hÃ¶her die Chance, dass es sich um identische Individuen handelt.
 
 
 Identische Individuen finden
 ----------------------------
 
-Paarvergleiche mit einem hohen Wert Übereinstimmungsresultat (hoher Wert von Result) müssen nun von Auge überprüft werden.
-Dabei können unter dem Register *Pair* alle Paarvergleiche aufgerufen werden oder unter Prediction nur diejenigen ausgewählter Ordner.
-Zur Analyse kann für jeden Paarvergleich in der jeweiligen Spalte die dazugehörigen Fotos inkl. Warzenmuster angezeigt werden (Augensymbol hinter Fotoname).
-Mit dem Klick auf die ID des Paarvergleichs können die Resultate auch detailliert dargestellt werden.
+Paarvergleiche mit einem hohen Wert Ãœbereinstimmungsresultat (hoher Wert von Result) mÃ¼ssen nun von Auge Ã¼berprÃ¼ft werden.
+Dabei kÃ¶nnen unter dem Register *Pair* alle Paarvergleiche aufgerufen werden oder unter Prediction nur diejenigen ausgewÃ¤hlter Ordner.
+Zur Analyse kann fÃ¼r jeden Paarvergleich in der jeweiligen Spalte die dazugehÃ¶rigen Fotos inkl. Warzenmuster angezeigt werden (Augensymbol hinter Fotoname).
+Mit dem Klick auf die ID des Paarvergleichs kÃ¶nnen die Resultate auch detailliert dargestellt werden.
 
-Mit den Feldern *match*, *no match* oder *undef* wird von Hand festgelegt, ob es sich um eine Übereinstimmung bzw. um dasselbe Individuum handelt.
+Mit den Feldern *match*, *no match* oder *undef* wird von Hand festgelegt, ob es sich um eine Ãœbereinstimmung bzw. um dasselbe Individuum handelt.
 
 
-Qualitätskontrolle
+QualitÃ¤tskontrolle
 ------------------
 
-Für die Qualitätskontrolle empfehlen wir zwei Vorgehen:
+FÃ¼r die QualitÃ¤tskontrolle empfehlen wir zwei Vorgehen:
 
-1.) Testfotos in die Analyse einbeziehen: Mit Vorteil sind dies unterschiedliche Fotos desselben Individuums. Alternativ kann auch ein Foto doppelt importiert und die Warzenmuster von einer Zweitperson erfasst werden. Der Paarvergleich funktioniert gut, wenn das Programm einen hohen Ähnlichkeitsindex für die Testfotos berechnet.
+1.) Testfotos in die Analyse einbeziehen: Mit Vorteil sind dies unterschiedliche Fotos desselben Individuums. Alternativ kann auch ein Foto doppelt importiert und die Warzenmuster von einer Zweitperson erfasst werden. Der Paarvergleich funktioniert gut, wenn das Programm einen hohen Ã„hnlichkeitsindex fÃ¼r die Testfotos berechnet.
 
-2.) Im Register *Prediction* können für zu definierende Fotos Paarvergleiche berechnet und separat abgespeichert werden. Unter dem Titel Matches fasst das Programm die Resultate der Paarvergleiche zusammen: true positive =TP, false positive = FP, true negative = TN, false negative = FN. Der Paarvergleich funktioniert gut, wenn die FN-Werte klein sind. 
+2.) Im Register *Prediction* kÃ¶nnen fÃ¼r zu definierende Fotos Paarvergleiche berechnet und separat abgespeichert werden. Unter dem Titel Matches fasst das Programm die Resultate der Paarvergleiche zusammen: true positive =TP, false positive = FP, true negative = TN, false negative = FN. Der Paarvergleich funktioniert gut, wenn die FN-Werte klein sind. 
 
 
 Export der Resultate
 --------------------
 
-Im Register *Image* können in der Rubrik Results zwei Tabellen im csv-Format exportiert werden: 
+Im Register *Image* kÃ¶nnen in der Rubrik Results zwei Tabellen im csv-Format exportiert werden: 
 
-*Image results*: Übersicht der Fotos mit denselben Individuen bzw. Wiederfänge
+*Image results*: Ãœbersicht der Fotos mit denselben Individuen bzw. WiederfÃ¤nge
 
-*Capture-Mark-Recapture*: Resultate formatiert für Fang-Wiederfang-Analysen
+*Capture-Mark-Recapture*: Resultate formatiert fÃ¼r Fang-Wiederfang-Analysen
 
 Die Resultate werden in Form einer Gesamttabelle exportiert, welche alle Paarvergleiche beinhaltet.
-Der Export von Paarvergleichen ausgewählter Fotos bzw. Ordnern ist zur Zeit noch nicht möglich.
+Der Export von Paarvergleichen ausgewÃ¤hlter Fotos bzw. Ordnern ist zur Zeit noch nicht mÃ¶glich.
 
 
-Anwendung des Programms für weitere Arten
+Anwendung des Programms fÃ¼r weitere Arten
 -----------------------------------------
 
-Für die Anwendung in Frage kommen theoretisch alle Tierarten, bei denen die Anordnung punktförmiger Merkmale individuell ausgeprägt ist.
-Dies trifft beispielweise auch für Kreuzkröten und Teichmolche zu. Die Tauglichkeit des Programms für diese Arten soll demnächst getestet werden.
-Nach Bedarf lässt sich das Werkzeug in Zukunft auch für andere Mustertypen weiterentwickeln.
+FÃ¼r die Anwendung in Frage kommen theoretisch alle Tierarten, bei denen die Anordnung punktfÃ¶rmiger Merkmale individuell ausgeprÃ¤gt ist.
+Dies trifft beispielweise auch fÃ¼r KreuzkrÃ¶ten und Teichmolche zu. Die Tauglichkeit des Programms fÃ¼r diese Arten soll demnÃ¤chst getestet werden.
+Nach Bedarf lÃ¤sst sich das Werkzeug in Zukunft auch fÃ¼r andere Mustertypen weiterentwickeln.
 
 
 Dokumentation
