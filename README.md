@@ -7,11 +7,11 @@ Compare the two point clouds of warts to decide if the image shows the same indi
 
 ## About
 
-[About (german)](file://doc/source/about.rst)
+[About (german)](doc/source/about.rst)
 
 ## Getting Started
 
-[Getting Started (german)](file://doc/source/getting_started.rst)
+[Getting Started (german)](doc/source/getting_started.rst)
 
 
 ## Installation and Deployment
@@ -23,7 +23,7 @@ Compare the two point clouds of warts to decide if the image shows the same indi
 
 List of software used:
 
-[Software](file://doc/source/software.rst)
+[Software](doc/source/software.rst)
 
 
 ## Demo
