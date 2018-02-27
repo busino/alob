@@ -3,7 +3,14 @@
 Alytes obstetricans obstetricans warts are unique and can be used to identify an individual.
 Compare the two point clouds of warts to decide if the image shows the same individual.
 
-![test](doc/source/images/alob_screen.png)
+### Compare 2 images
+
+![Compare 2 images](doc/source/images/alob_screen.png)
+
+### Capture-Mark-Recapture
+
+![Compare 2 images](doc/source/images/alob_mcr.png)
+
 
 ## About
 
