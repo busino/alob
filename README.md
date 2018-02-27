@@ -16,8 +16,8 @@ Compare the two point clouds of warts to decide if the image shows the same indi
 
 ## Installation and Deployment
 
-* Instruction to setup the Alob-Server can be found in [Deployment](file://doc/source/deploy.rst).
-* Instruction for setup on local machine for testing and development: [Devel](file://doc/source/deploy.rst)
+* Instruction to setup the Alob-Server can be found in [Deployment](doc/source/deploy.rst).
+* Instruction for setup on local machine for testing and development: [Devel](doc/source/deploy.rst)
 
 ## Prerequisites
 
