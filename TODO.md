@@ -14,3 +14,7 @@ sum(all_features)
 
  * select 10 worst pairs per feature
  * preselect only with min value, not range (min, max)
+
+## Mark-Capture-Recapture
+
+ Select pools for evaluation

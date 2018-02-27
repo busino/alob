@@ -36,3 +36,44 @@ List of software used:
 ## Demo
 
 To be setup
+
+
+## Citation
+
+Schlup, B.; Bühler, Ch. und Walker R. 2017: ALOB - Programm zum Wiedererkennen von Geburtshelferkröten. Version 1.0.
+
+
+## Team
+
+
+**Project-Lead**
+
+```
+Barbara Schlup
+Dr. sc. ETH, dipl. Forstingenieurin ETH
+Hintermann & Weber AG, Bern – Switzerland
+```
+
+**Project-Supervisor**
+
+```
+Christoph Bühler
+Dipl. Biologe 
+Hintermann & Weber AG, Reinach - Switzerland
+```
+
+**Algorithms & Programming**
+
+```
+Raphael Walker
+MSc ETH Zurich
+Product- & Software-Developer, Altdorf - Switzerland
+www.busino.ch
+```
+
+
+##Partners
+
+Das Projekt wurde finanziell vom Bundesamt für Umwelt BAFU unterstützt.
+
+Die fachliche Begleitung erfolgte durch Benedikt Schmid (info fauna karch).
