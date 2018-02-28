@@ -13,8 +13,7 @@ import sklearn.svm
 import sklearn.decomposition
 
 import alob.ml.features as alob_features
-from alob.affine import affine_matrix_from_points
-from alob.match import MatchPCL, match_pc, match_images
+from alob.match import match_images
 
 
 log = logging.getLogger()
@@ -51,6 +50,12 @@ def extract_helper(src, dst, search_radius):
     src = src.copy()
     dst = dst.copy()
 
+    src_coords = numpy.array([src['x'], src['y']])
+    dst_coords = numpy.array([dst['x'], dst['y']])
+    
+    src_warts = src_coords[:,4:]
+    dst_warts = dst_coords[:,4:]
+
     #dst_coords = numpy.array([dst['x'], dst['y']])
     #src_coords = numpy.array([src['x'], src['y']])
     #src_initial_points = src[:4]['x'], src[:4]['y']
@@ -66,9 +71,9 @@ def extract_helper(src, dst, search_radius):
                            tail_distance=numpy.abs(src_tail-dst_tail))
 
 
-    _, (_, _), _, _, result = match_images(src,
-                                           dst,
-                                           search_radius)
+    dst_t, (_, _), _, _, result = match_images(src_warts,
+                                               dst_warts,
+                                               search_radius)
     
     features['match_result_min'] = result/min(src.shape[0], dst.shape[0])
     features['match_result_max'] = result/max(src.shape[0], dst.shape[0])
@@ -79,13 +84,8 @@ def extract_helper(src, dst, search_radius):
     
     #dst_t = matrix_transform(dst_coords.T, M)
 
-    
-    dst['x'][4:] = dst_t[0,4:]
-    dst['y'][4:] = dst_t[1,4:]
-    
-    # prepare point clouds
-    src_pc = numpy.array([src[4:]['x'], src[4:]['y']])
-    dst_pc = numpy.array([dst[4:]['x'], dst[4:]['y']])
+    src_pc = src_warts
+    dst_pc = dst_t    
     #src_pc_c = src_pc.T.flatten().view(dtype=numpy.complex128)
     #dst_pc_c = dst_pc.T.flatten().view(dtype=numpy.complex128)
     num_points_min = numpy.min([src_pc.shape[1], dst_pc.shape[1]])
@@ -161,7 +161,7 @@ class AlobPairClassifier:
         log.debug('AlobPairClassifier.extract_features')        
         
         # Only start parallel processing if more than 10000 pairs have to be calculated
-        if len(pairs) > 20000:
+        if len(pairs) > 2000:
             pairs_t = Parallel(n_jobs=cpu_count()-1, verbose=0)\
                            (delayed(extract_helper)(images[f], images[s], self.search_radius) 
                             for f,s in pairs)          
