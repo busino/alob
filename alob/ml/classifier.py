@@ -14,7 +14,7 @@ import sklearn.decomposition
 
 import alob.ml.features as alob_features
 from alob.affine import affine_matrix_from_points
-from alob.match import MatchPCL, match_pc
+from alob.match import MatchPCL, match_pc, match_images
 
 
 log = logging.getLogger()
@@ -66,9 +66,9 @@ def extract_helper(src, dst, search_radius):
                            tail_distance=numpy.abs(src_tail-dst_tail))
 
 
-    dst_t, matches, M, result = new_match_images(src,
-                                                 dst,
-                                                 search_radius)
+    _, (_, _), _, _, result = match_images(src,
+                                           dst,
+                                           search_radius)
     
     features['match_result_min'] = result/min(src.shape[0], dst.shape[0])
     features['match_result_max'] = result/max(src.shape[0], dst.shape[0])

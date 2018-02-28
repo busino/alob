@@ -24,7 +24,7 @@ def score():
     log.info('Predict')
     search_radius = SEARCH_RADIUS
 
-    preselect = Preselect(search_radius=search_radius, filename='preselect.pkl')
+    preselect = Preselect(search_radius=search_radius, filename='alob_pair_preselect.pkl')
 
     res = preselect.predict(features=features)
 
