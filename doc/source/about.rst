@@ -10,7 +10,7 @@ Alob 1.0, Dezember 2017
 About / Impressum
 -----------------
 
-Das open-source Programm dient der Analyse von Punktmustern zur Wiedererkennung von Individuen der Geburtshelferkröte. Typische Anwendungsbereichen des Programms sind Monitoring und Erfolgskontrolle, wenn mit Fang-Wiederfang Bestandesgrössen oder die Raumnutzung der Tiere bestimmt werden sollen.
+Das open-source Programm dient der Analyse von Punktmustern zur Wiedererkennung von Individuen der Geburtshelferkröte. Typische Anwendungsbereiche des Programms sind Monitoring und Erfolgskontrolle, wenn mit Fang-Wiederfang Bestandesgrössen oder die Raumnutzung der Tiere bestimmt werden sollen.
 
 
 Citation / Zitierungsvorschlag
