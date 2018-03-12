@@ -4,7 +4,7 @@ from collections import OrderedDict
 import logging
 
 import numpy
-from joblib import Parallel, cpu_count, delayed
+from joblib import Parallel, delayed
 from skimage.transform._geometric import matrix_transform
 from sklearn.pipeline import Pipeline
 import sklearn.preprocessing
@@ -162,7 +162,7 @@ class AlobPairClassifier:
         
         # Only start parallel processing if more than 10000 pairs have to be calculated
         if len(pairs) > 2000:
-            pairs_t = Parallel(n_jobs=cpu_count()-1, verbose=0)\
+            pairs_t = Parallel(n_jobs=-2, verbose=0)\
                            (delayed(extract_helper)(images[f], images[s], self.search_radius) 
                             for f,s in pairs)          
         else:

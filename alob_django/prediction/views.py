@@ -51,7 +51,7 @@ class DetailView(generic.DetailView):
         context['num_images'] = n
         num_comb =  int(n*(n-1)/2)
         t = 0.02
-        num_procs = joblib.cpu_count()-1
+        num_procs = max(joblib.cpu_count()-1, 1)
         t = num_comb * t / num_procs 
         context['num_combinations'] = num_comb
         context['num_procs'] = num_procs

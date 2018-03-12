@@ -8,7 +8,7 @@ import logging
 from time import clock
 import os
 import sys
-from joblib import Parallel, delayed, cpu_count
+from joblib import Parallel, delayed
 
 from alob.match import match_images
 
@@ -68,8 +68,7 @@ if __name__ == '__main__':
     django.db.connections.close_all()
     
     if False:
-
-        n_jobs = 1#cpu_count()
+        n_jobs = -2
         logging.debug('Using %s jobs in parallel.' % n_jobs)
         results = Parallel(n_jobs=n_jobs, verbose=51)(delayed(dj_helper)(p_id, 3) for p_id in pairs)    
         
@@ -79,7 +78,7 @@ if __name__ == '__main__':
     
         p_data = [(pair.id, pair.first.point_cloud(), pair.second.point_cloud()) for pair in pairs]
         
-        n_jobs = cpu_count()
+        n_jobs = -2
         logging.debug('Using %s jobs in parallel.' % n_jobs)
         search_radius = settings.SEARCH_RADIUS
         results = Parallel(n_jobs=n_jobs, verbose=51)(delayed(helper)(p_id, first_pcl, second_pcl, search_radius) for (p_id, first_pcl, second_pcl) in p_data)    

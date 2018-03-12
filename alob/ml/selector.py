@@ -9,7 +9,7 @@ from alob.ml.estimator import RoughEstimator
 import alob.ml.features as alob_features
 from alob.match import match_pc
 
-from joblib import Parallel, cpu_count, delayed
+from joblib import Parallel, delayed
 
 from sklearn.pipeline import Pipeline
 import sklearn.preprocessing
@@ -151,7 +151,7 @@ class Preselect:
         
         # Only start parallel processing if more than 10000 pairs have to be calculated
         if len(pairs) > 20000:
-            pairs_t = Parallel(n_jobs=cpu_count()-1, verbose=0)\
+            pairs_t = Parallel(n_jobs=-2, verbose=0)\
                            (delayed(extract_helper)(images[f], images[s], self.search_radius) 
                             for f,s in pairs)          
         else:
