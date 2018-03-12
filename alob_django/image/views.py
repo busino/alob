@@ -459,7 +459,7 @@ class ResultCmrView(generic.TemplateView):
                 w in nd and nd.pop(w)
         
         # Extend with all other images
-        for i in Image.objects.exclude(id__in=images_with_matches).order_by('date').values_list('id', flat=True):
+        for i in Image.objects.exclude(id__in=images_with_matches).filter(date__isnull=False).order_by('date').values_list('id', flat=True):
             nd[i].add(i)
         
         dates = numpy.unique(Image.objects.filter(date__isnull=False).values_list('date', flat=True))
