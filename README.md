@@ -26,7 +26,7 @@ Compare the two point clouds of warts to decide if the image shows the same indi
 > LINK FOR LOCAL MACHINE SEEMS TO BE WRONG (IT POINTS TO DEPLOY INSTRUCTION)
 
 * Instruction to setup the Alob-Server can be found in [Deployment](doc/source/deploy.rst).
-* Instruction for setup on local machine for testing and development: [Devel](doc/source/deploy.rst)
+* Instruction for setup on local machine for testing and development: [Devel](doc/source/devel.rst)
 
 ## Prerequisites
 
