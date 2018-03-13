@@ -177,24 +177,24 @@ Mit dem Klick auf die jeweilige Liste der berechneten Paarvergleiche können die
 
 Als Beispiel die Zusammenfassung der Resultate eines fiktiven Paarvergleiches mit 34 Fotos:
 
-```
-#Images: 34
-Combinations: 561
-Num. Processes: 1
-Time approx:  5.61 s
-```
+::
+
+    #Images: 34
+    Combinations: 561
+    Num. Processes: 1
+    Time approx:  5.61 s
 
 Es werden 561 mögliche Kombinationen von Paarvergleichen berechnet. Die Berechnung dauert 5.6 Sekunden.
 Im Programm ist eine machine-learning-Routine implementiert, welche basierend auf verschiedenen Berechnungen für jeden Paarvergleich entscheidet, ob eine Übereinstimmung vorliegt.
 Diese Resultate werden immer genauer, je mehr Paarvergleiche von Hand analysiert bzw. als *Match* oder *no Match* bewertet werden. 
 Die Resultate werden wie folgt dargestellt:
 
-```
-TP: 2
-FP: 4
-TN: 282
-FN: 0
-```
+::
+
+    TP: 2
+    FP: 4
+    TN: 282
+    FN: 0
 
 **TP (true positive)**: Es sind 2 Matches vorhanden, welche vom Programm als Übereinstimmung vorgeschlagen und bereits zu einem früheren Zeitpunkt vom Bearbeiter als Match bestätigt wurden. Hier können wir also sicher sein, dass die Fotos vom selben Individuum stammen.
 
