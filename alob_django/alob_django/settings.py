@@ -14,6 +14,7 @@ import os
 DEPLOY_TYPE = 'production'#'production'# 'dev', 'local'
 
 SEARCH_RADIUS = 0.17
+PRESELECT_SEARCH_RADIUS = 0.25
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

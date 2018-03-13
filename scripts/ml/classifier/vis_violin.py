@@ -58,7 +58,7 @@ for i,column in list(enumerate(columns))[:]:
     y = data[idx]
     x = numpy.zeros(y.shape)+ix
     index = pairs[idx].id
-    src = ColumnDataSource(data=dict(x=x, y=y, id=index, fill_color=['red']*len(id)))
+    src = ColumnDataSource(data=dict(x=x, y=y, id=index, fill_color=['red']*len(index)))
     plot.circle(source=src, size=6, x='x', y='y', id='id', line_color='fill_color', fill_color='fill_color')
     # Prediction
     #y = data

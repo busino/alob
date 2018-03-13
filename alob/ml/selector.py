@@ -150,7 +150,7 @@ class Preselect:
         log.debug('Preselect.extract_features')        
         
         # Only start parallel processing if more than 10000 pairs have to be calculated
-        if len(pairs) > 20000:
+        if True:#len(pairs) > 2000:
             pairs_t = Parallel(n_jobs=-2, verbose=0)\
                            (delayed(extract_helper)(images[f], images[s], self.search_radius) 
                             for f,s in pairs)          
@@ -183,6 +183,7 @@ class Preselect:
         log.debug('Preselect.predict')
         if features is None:
             features = self.extract_features(images, pairs)
+            features = numpy.array([list(v.values()) for v in features])
         self.load()
         res = self.pipe.predict(features)
         return res
@@ -208,7 +209,7 @@ class Preselect:
         log.debug('Preselect.fit')
         if features is None:
             features = self.extract_features(images, pairs)
-        
+            features = numpy.array([list(v.values()) for v in features])
         pipe = Pipeline([('scaler', sklearn.preprocessing.StandardScaler()),
                          ('rest', RoughEstimator())])
         

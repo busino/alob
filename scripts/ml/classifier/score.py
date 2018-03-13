@@ -13,10 +13,10 @@ SEARCH_RADIUS = 0.17
 PRESELCT_SEARCH_RADIUS = 0.25
 
 
-def train():
+def score_cl():
     
     
-    log.info('Train')
+    log.info('Score')
     
     t0 = clock()
     RANDOM_SEED = 1
@@ -33,8 +33,6 @@ def train():
     
     pairs = numpy.load('pairs.npy')
     
-    # TODO
-    pairs = pairs[:20]
 
     #
     # Preselect data    
@@ -84,7 +82,7 @@ def train():
     
     # make sure to have 50% of matches in train
     selection = numpy.argsort(-labels)
-    NUM_SAMPLES = 18# TODO
+    NUM_SAMPLES = 12000
     labels = labels[selection[:NUM_SAMPLES]]
     features = features[selection[:NUM_SAMPLES]]
     
@@ -98,9 +96,10 @@ def train():
     score = classifier.score(test_labels, predictions)
     
     log.info(score)
-
+    for k,v in score.items():
+        log.info('{}:\t{}'.format(k,v))
 
 if __name__ == '__main__':
     
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    train()
+    score_cl()

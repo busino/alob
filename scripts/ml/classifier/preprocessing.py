@@ -21,7 +21,7 @@ def preprocessing():
     # images
     images = {}
     image_ids = []
-    for image in Image.objects.filter(is_labeled=True):
+    for image in Image.objects.filter(is_labeled=True, disabled=False):
         images[str(image.pk)] = image.pc_recarr()
         image_ids.append(image.pk)
 

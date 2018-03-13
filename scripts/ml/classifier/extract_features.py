@@ -25,8 +25,6 @@ def extract_features():
     images = numpy.load('images.npz')
     pairs = numpy.load('pairs.npy')
 
-    pairs = pairs[:20]# TODO
-
     image_ids, images = zip(*images.iteritems())
     image_ids = numpy.array(image_ids).astype(numpy.int64)
     images = dict(zip(image_ids, images))

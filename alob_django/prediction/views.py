@@ -25,6 +25,7 @@ from pair.models import Pair
 from .models import Prediction
 from .apps import PredictionConfig
 from .forms import PredictionForm
+from contrib.colors import PRED_TYPE_CSS_CLASSES
 
 APP_NAME = PredictionConfig.name
 APP_CLASS = Prediction
@@ -50,14 +51,14 @@ class DetailView(generic.DetailView):
         n = Image.objects.filter(pools__in=self.object.pools.all()).count()
         context['num_images'] = n
         num_comb =  int(n*(n-1)/2)
-        t = 0.02
+        t = 2.
         num_procs = max(joblib.cpu_count()-1, 1)
         t = num_comb * t / num_procs 
         context['num_combinations'] = num_comb
         context['num_procs'] = num_procs
         context['approx_calc_time'] = elapsed_human(t)
         if self.object.status == 'running':
-            context['time_left'] = (self.object.started+datetime.timedelta(seconds=t))-datetime.datetime.now()
+            context['time_left'] = datetime.datetime.now()-(self.object.started+datetime.timedelta(seconds=t))
             context['really_running'] = process_exists(self.object.pid)
         
         if self.object.prediction:
@@ -67,13 +68,32 @@ class DetailView(generic.DetailView):
             #context['selected_percentage;]'] = self.object.num_selected/num_comb*100
             pool_ids = list(self.object.pools.all().values_list('id', flat=True))
             pairs = Pair.objects.filter(first__pools__in=pool_ids,
-                                        second__pools__in=pool_ids)
+                                        second__pools__in=pool_ids)\
+                                .order_by('-match')
             context['tp'] = matches.filter(match__in=[1,-1]).count()
             context['fp'] = matches.filter(Q(match=0) | Q(match__isnull=True)).count()
             context['fn'] = pairs.exclude(id__in=match_ids).filter(match__in=[1,-1]).count()
             context['tn'] = pairs.exclude(id__in=match_ids).filter(Q(match=0) | Q(match__isnull=True)).count()
-            context['matches'] = matches | pairs.exclude(id__in=match_ids).filter(match__in=[1,-1])
             context['time_used'] = round((self.object.ended - self.object.started).total_seconds())
+
+            data = []            
+            for pair in pairs:
+                pred = int(pair.pk in match_ids)
+                if pred == 0: 
+                    if pair.match != 1:
+                        continue
+                    else:
+                        type = 'fn'
+                if pred == 1:
+                    if pair.match == 1:
+                        type = 'tp'
+                    else:
+                        type = 'fp'
+                data.append(dict(pk=pair.pk, match=pair.match, 
+                                 type=type, pred=pred, css_class=PRED_TYPE_CSS_CLASSES[type], 
+                                 first_name=pair.first.name, second_name=pair.second.name))
+            context['data'] = data
+            
         return context
 
 

@@ -15,6 +15,7 @@ import pandas
 import numpy
 
 from alob.ml.classifier import AlobPairClassifier
+from alob.ml.selector import Preselect
 
 log = logging.getLogger('alob')
 
@@ -61,12 +62,21 @@ def main(prediction_id, stats=False):
                                                                    is_labeled=True)])
     
         image_ids = images.keys()
-        print('Images: {}'.format(len(image_ids)))
+        log.debug('Images: {}'.format(len(image_ids)))
         
         # Pair generation
         pairs = list(combinations( image_ids,  2))
-    
+        num_pairs = len(pairs)
         log.debug('Num Pairs: {}'.format(len(pairs)))
+    
+        #
+        # TODO Preselect
+        #
+        preselect = Preselect(filename='__default__', search_radius=settings.PRESELECT_SEARCH_RADIUS)
+        res = preselect.predict(images, pairs)
+        res = numpy.array(res).astype(bool)
+        pairs = numpy.array(pairs)[res].tolist()
+        log.debug('Selected: {}/{}'.format(len(pairs), num_pairs))
     
         # Predict
         cl = AlobPairClassifier(filename='__default__', search_radius=settings.SEARCH_RADIUS)
@@ -139,4 +149,4 @@ if __name__ == '__main__':
 
     main(args.prediction, args.stats)
 
-    log.debug('Time used: {}s'.format(clock()-t0))
+    log.debug('Time used: {:.2f}s'.format(clock()-t0))

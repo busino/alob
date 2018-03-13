@@ -11,6 +11,7 @@ import sklearn.preprocessing
 import sklearn.metrics
 import sklearn.svm
 import sklearn.decomposition
+#import sklearn.neural_network
 
 import alob.ml.features as alob_features
 from alob.match import match_images
@@ -155,13 +156,15 @@ class AlobPairClassifier:
             filename = os.path.abspath(os.path.join(os.path.dirname(__file__), 'alob_pair_classifier.pkl'))
         self.filename = filename
         self.pipe = None
+        self.labels = [1,0]
+        self.pos_label = 1
 
     def extract_features(self, images, pairs):
         
         log.debug('AlobPairClassifier.extract_features')        
         
         # Only start parallel processing if more than 10000 pairs have to be calculated
-        if len(pairs) > 2000:
+        if True:#len(pairs) > 2000:
             pairs_t = Parallel(n_jobs=-2, verbose=0)\
                            (delayed(extract_helper)(images[f], images[s], self.search_radius) 
                             for f,s in pairs)          
@@ -201,11 +204,11 @@ class AlobPairClassifier:
 
     def score(self, labels, predictions):
         log.debug('AlobPairClassifier.score')
-        C = sklearn.metrics.confusion_matrix(labels, predictions)
-        tn = C[0,0]
-        tp = C[1,1]
-        fn = C[1,0]
-        fp = C[0,1]
+        C = sklearn.metrics.confusion_matrix(labels, predictions, labels=self.labels)
+        tp = C[0,0]
+        fp = C[1,0]
+        tn = C[1,1]
+        fn = C[0,1]
         pos = fp + tp
         tot = numpy.sum(C)
         n_match = numpy.sum(C[1])
@@ -213,21 +216,41 @@ class AlobPairClassifier:
         fp_percentage = fp/n_match*100
 
         percentage = pos/tot*100
-        precision = sklearn.metrics.precision_score(labels, predictions)
-        recall = sklearn.metrics.recall_score(labels, predictions)
+        precision = sklearn.metrics.precision_score(labels, predictions, labels=[0,1])
+        recall = sklearn.metrics.recall_score(labels, predictions, labels=self.labels, pos_label=self.pos_label)
         acc = sklearn.metrics.accuracy_score(labels, predictions)
-        return dict(C=C, tn=tn, fn=fn, fp=fp, tp=tp, percentage=percentage, 
-                    precision=precision, recall=recall, acc=acc,
-                    fn_percentage=fn_percentage, fp_percentage=fp_percentage
+        f1_score = sklearn.metrics.f1_score(labels, predictions, labels=self.labels, pos_label=self.pos_label)
+        return OrderedDict(C=C, 
+                           tp=tp, fp=fp, tn=tn, fn=fn, tot=tot,
+                           percentage=percentage, 
+                           precision=precision, recall=recall, acc=acc,
+                           f1_score=f1_score,
+                           fn_percentage=fn_percentage, fp_percentage=fp_percentage
                     )
     
     def fit(self, labels, images=None, pairs=None, features=None):
         log.debug('AlobPairClassifier.fit')
         if features is None:
             features = self.extract_features(images, pairs)
-        pipe = Pipeline([('scaler', sklearn.preprocessing.MinMaxScaler()),
-                         ('pca', sklearn.decomposition.PCA(n_components=8)),
-                         ('svc', sklearn.svm.SVC(tol=1e-4, kernel='linear', shrinking=True, C=8, class_weight={1: 160}))])
+            features = numpy.array([list(v.values()) for v in features])
+        pipe = Pipeline([#('scaler', sklearn.preprocessing.MinMaxScaler()),
+                         ('scaler', sklearn.preprocessing.StandardScaler()),
+                         #('pca', sklearn.decomposition.PCA(n_components=8)),
+                         ('pca', sklearn.decomposition.PCA(tol=1e-6, whiten=True, n_components='mle', svd_solver='full')),
+                         ('svc', sklearn.svm.SVC(decision_function_shape='ovr', tol=1e-6, kernel='linear', shrinking=True, C=64, class_weight={1: 120}))
+                         #('mlp', sklearn.neural_network.MLPClassifier(solver='sgd',#adam, lbfgs,sgd
+                         #                                             activation='relu',#'relu',
+                         #                                             learning_rate_init=0.001,
+                         #                                             batch_size=100,
+                         #                                             alpha=1e-6,
+                         #                                             tol=1e-6,
+                         #                                             verbose=True,
+                         #                                             max_iter=12000,
+                         #                                             #learning_rate='invscaling',
+                         #                                             hidden_layer_sizes=(120, 120, 36),
+                         #                                             #random_state=self.random_seed
+                         #                                             )),
+                         ])
         
         log.debug(' pipe.fit')
         pipe.fit(features, labels)

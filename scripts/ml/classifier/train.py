@@ -33,15 +33,14 @@ def train():
     
     pairs = numpy.load('pairs.npy')
     
-    # TODO
-    pairs = pairs[:20]
 
 
     #
     # Preselect data    
     #
     log.info('Preselect')
-    preselect = Preselect(search_radius=PRESELCT_SEARCH_RADIUS, filename='preselect.pkl')
+    '''
+    preselect = Preselect(search_radius=PRESELCT_SEARCH_RADIUS, filename='__default__')
     res = preselect.predict(images, pairs[['first_id', 'second_id']].tolist())
     
     log.info('Num Pairs: {} Selected: {}'.format(len(res), sum(res)))
@@ -49,7 +48,10 @@ def train():
     
     # convert to bool to be used as index
     res = res.astype(bool, copy=False)
-
+    numpy.save('preselect_res.npy', res)
+    return
+    '''
+    res = numpy.load('preselect_res.npy')
     #
     # Load data for classifier
     #
@@ -85,7 +87,7 @@ def train():
     
     # make sure to have 50% of matches in train
     selection = numpy.argsort(-labels)
-    NUM_SAMPLES = 18# TODO
+    NUM_SAMPLES = 12000
     labels = labels[selection[:NUM_SAMPLES]]
     features = features[selection[:NUM_SAMPLES]]
     
@@ -106,8 +108,14 @@ def train():
     predictions = classifier.predict(features=test_features.tolist())
     
     log.info('Score')
-    classifier.score(test_labels, predictions)
-    
+    score = classifier.score(test_labels, predictions)
+
+    for k,v in score.items():
+        print('{}:\t{}'.format(k,v))
+        
+    print('Recall: tp/(tp+fn): {}'.format(score['tp']/(score['tp']+score['fn'])))
+    print('Precision: tp/(tp+fp): {}'.format(score['tp']/(score['tp']+score['fp'])))
+    print('Accuracy: (tp+tn)/tot: {}'.format((score['tp']+score['tn'])/score['tot']))
 
 if __name__ == '__main__':
     

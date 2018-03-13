@@ -66,23 +66,35 @@ TN: {{ tn }}
 FN: {{ fn }}
 </pre>
 
+
 <table class="table table-condensed table-striped table-nonfluid table-hover">
-  <caption>#Matches: {{matches.count}}</caption>
+  <caption>#Matches: {{data|length}}</caption>
   <tr>
     <th>Pair</th>
     <th>Match</th>
+    <th>Pred</th>
+    <th>Type</th>
     <th>Name</th>
     <th>Name</th>
   </tr>
-{% for p in matches %}
+{% for p in data %}
   <tr>
-    <td><a href="{% url 'pair:detail' p.id %}">{% pair %}</a></td>
+    <td><a href="{% url 'pair:detail' p.pk %}">{% pair %}</a></td>
     <td>{{ p.match }}</td>
-    <td>{{ p.first.name }}</td>
-    <td>{{ p.second.name }}</td>
+    <td>{{ p.pred }}</td>
+    <td class="{{ p.css_class }}">{{ p.type }}</td>
+    <td>{{ p.first_name }}</td>
+    <td>{{ p.second_name }}</td>
   </tr>
 {% endfor %}  
 </table>
+
+
+
 {% endif %}
+
+
+
+
 
 {% endblock %}

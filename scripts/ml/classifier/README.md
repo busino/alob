@@ -12,7 +12,7 @@ Extract the features
 python extract_features.py
 ```
 
-Train Classifer
+Train Classifier
 
 ```
 python train.py
