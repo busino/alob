@@ -1,3 +1,6 @@
+# Alob Project
+# 2016 -2018
+# Author(s): R.Walker
 FROM debian:latest
 ENV SET_CONTAINER_TIMEZONE true
 ENV CONTAINER_TIMEZONE Europe/Zurich
@@ -16,13 +19,8 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh \
     && /bin/bash ~/miniconda.sh -b -p /opt/conda \
     && rm ~/miniconda.sh
 ENV PATH /opt/conda/bin:$PATH
-# Use append to add conda-forge at the end of channels
-# conda config --append channels conda-forge \
-# Seems to be a bad idea to mix defaults and conda-forge channels
-RUN conda config --add channels bokeh \
-    && conda install --file /install/conda_packages.txt \
+RUN conda install --file /install/conda_packages.txt \
     && conda clean -i -l -t -y
 RUN pip install -r /install/requirements.txt \
     && rm -rf /root/.cache/pip/*
 CMD ["python"]
-#, "manage.py", "runserver", "0.0.0.0:8008"]
