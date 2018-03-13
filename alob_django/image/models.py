@@ -1,7 +1,8 @@
 '''
- Alob Project
- 2016
- Author(s): R. Walker
+Alob Project
+2016 - 2018
+Author(s): R.Walker
+
 '''
 import os
 import logging

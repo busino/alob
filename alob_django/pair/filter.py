@@ -1,7 +1,8 @@
 '''
- Alob Project
- 2017
- Author(s): R. Walker
+Alob Project
+2016 - 2018
+Author(s): R.Walker
+
 '''
 import django_filters
 

@@ -1,19 +1,24 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import logging
 import os
 import pickle
 from collections import OrderedDict
 
 import numpy
+from joblib import Parallel, delayed
+from sklearn.pipeline import Pipeline
+import sklearn.preprocessing
+import sklearn.metrics
 
 from alob.ml.estimator import RoughEstimator
 import alob.ml.features as alob_features
 from alob.match import match_pc
 
-from joblib import Parallel, delayed
-
-from sklearn.pipeline import Pipeline
-import sklearn.preprocessing
-import sklearn.metrics
 
 log = logging.getLogger()
 

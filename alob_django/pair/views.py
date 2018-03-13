@@ -1,18 +1,16 @@
 '''
 Alob Project
-2016
+2016 - 2018
 Author(s): R.Walker
 
 '''
-from itertools import combinations
 from time import clock
 import datetime
-import tempfile
 import json
-import subprocess
 import os
 
 import numpy
+from skimage.transform._geometric import matrix_transform
 
 from django.views import generic
 from django.shortcuts import render, redirect, render_to_response
@@ -24,12 +22,10 @@ from django.urls.base import reverse_lazy
 from django_filters.views import FilterView
 
 from alob_plot.pair import pair_plot
-
 from alob.match import match_pc, match_images
 
 from .models import Pair
 from .filter import PairFilter
-from skimage.transform._geometric import matrix_transform
 
 DEFAULT_PAGINATION_BY = 100
 DEFAULT_PAGINATE_ORPHANS = 10

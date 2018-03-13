@@ -1,5 +1,12 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import io
 import pandas
+
 
 def export_images_excel(object_list):
     output = io.BytesIO()

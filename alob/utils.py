@@ -1,7 +1,8 @@
 '''
 Alob Project
-2017 
-Author(s): R. Walker
+2016 -2018
+Author(s): R.Walker
+
 '''
 import cmath
 import psutil
@@ -12,6 +13,7 @@ def norm(c, v=1):
     v: optional, can be used to set the absolute value of the new vector
     '''
     return c/abs(c)*v
+
 
 def rot(c, angle):
     '''

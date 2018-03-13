@@ -1,10 +1,14 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import os
 import datetime
 import tarfile
 
 import boto3
-
-
 
 KEY = 'XXX'
 SECRET = 'XXX'

@@ -1,3 +1,6 @@
+# Alob Project
+# 2016 -2018
+# Author(s): R.Walker
 version: '3'
 services:
   db:

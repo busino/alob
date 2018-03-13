@@ -1,4 +1,9 @@
-#!/usr/bin/env python
+'''
+Alob Project
+2016 - 2018
+Author(s): R.Walker
+
+'''
 import os
 import sys
 

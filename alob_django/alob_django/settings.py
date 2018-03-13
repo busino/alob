@@ -1,6 +1,6 @@
 '''
 Alob Project
-2016
+2016 -2018
 Author(s): R.Walker
 
 '''
@@ -11,7 +11,7 @@ import os
 #
 #
 
-DEPLOY_TYPE = 'production'#'production'# 'dev', 'local'
+DEPLOY_TYPE = 'production'#'production'# 'dev'
 
 SEARCH_RADIUS = 0.17
 PRESELECT_SEARCH_RADIUS = 0.25
@@ -101,7 +101,7 @@ DATABASES = {
         'NAME': 'alob',                      # Or path to database file if using sqlite3.
         'USER': 'alob',                     # Not used with sqlite3.
         'PASSWORD': 'alob',                  # Not used with sqlite3.
-        'HOST': {'production': 'db', 'dev': 'db', 'local': ''}.get(DEPLOY_TYPE, 'db'),
+        'HOST': {'production': 'db', 'dev': ''}.get(DEPLOY_TYPE, 'db'),
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     },
     'default_sqlite': {

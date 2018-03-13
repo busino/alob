@@ -1,3 +1,9 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import logging
 from time import clock
 import sys

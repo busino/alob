@@ -1,3 +1,9 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import os
 import pickle
 from collections import OrderedDict
@@ -11,7 +17,6 @@ import sklearn.preprocessing
 import sklearn.metrics
 import sklearn.svm
 import sklearn.decomposition
-#import sklearn.neural_network
 
 import alob.ml.features as alob_features
 from alob.match import match_images

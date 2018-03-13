@@ -1,7 +1,8 @@
 Software Packages Used
 ======================
 
-Special thanks to all the developers creating amazing OSS.
+Special thanks to all the developers creating amazing `OSS <https://de.wikipedia.org/wiki/Open_Source>`_.
+
 This is the list of python packages used to run and develop Alob.
 
     alabaster

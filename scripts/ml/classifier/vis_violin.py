@@ -1,17 +1,23 @@
+'''
+Alob Project
+2016 -2018
+Author(s): R.Walker
+
+'''
 import math
 
 import numpy
 from scipy import stats
+from sklearn.preprocessing.data import MinMaxScaler#StandardScaler, RobustScaler
 
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.io import output_file, save#, show
-from sklearn.preprocessing.data import MinMaxScaler#StandardScaler, RobustScaler
 from bokeh.models.tools import HoverTool, TapTool
 from bokeh.models.callbacks import OpenURL
 
 #
 # TODO
-# split the data in matches and no-matches and visualize them separatley (left, right side of the violin)
+# split the data in matches and no-matches and visualize them separately (left, right side of the violin)
 #
 
 

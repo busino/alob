@@ -1,3 +1,9 @@
+'''
+Alob Project
+2016 - 2018
+Author(s): R.Walker
+
+'''
 from django.views import generic
 
 from django.urls.base import reverse_lazy

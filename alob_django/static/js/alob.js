@@ -1,3 +1,10 @@
+/*
+* Alob Project
+* 2016 - 2018
+* Author(s): R.Walker
+*
+*/
+
 function show_image(e, width=400) {
   var obj = $(e);
   var div = obj.parent();

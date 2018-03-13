@@ -1,6 +1,6 @@
 '''
 Alob Project
-2016
+2016 -2018
 Author(s): R.Walker
 
 '''
@@ -9,9 +9,9 @@ import logging
 from itertools import product, combinations
 
 import numpy
+from skimage.transform._geometric import matrix_transform
 
 from .affine import affine_matrix_from_points
-from skimage.transform._geometric import matrix_transform
 
 
 log = logging.getLogger(__name__)

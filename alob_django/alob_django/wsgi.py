@@ -1,10 +1,9 @@
 '''
 Alob Project
-2016
+2016 -2018
 Author(s): R.Walker
 
 '''
-
 import os
 
 from django.core.wsgi import get_wsgi_application
