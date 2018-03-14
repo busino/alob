@@ -172,7 +172,10 @@ class ExportCSV(generic.ListView):
         buf.write(header)
         with connection.cursor() as cursor:
             cursor.execute('{}'.format(p_query.query))
-            [buf.write(out_str.format(*v)) for v in cursor.fetchall()]
+            for v in cursor.fetchall():
+                v = list(v)
+                v[2] = '"{}"'.format(v[2])
+                buf.write(out_str.format(*v))
         
         cf = ContentFile(buf.getvalue())
         response = HttpResponse(cf,
