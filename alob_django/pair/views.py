@@ -22,6 +22,8 @@ from django.forms.forms import Form
 from django.urls.base import reverse_lazy
 from django_filters.views import FilterView
 from django.core.files.base import ContentFile
+from django.db import connection
+
 
 from alob_plot.pair import pair_plot
 from alob.match import match_pc, match_images
@@ -157,8 +159,6 @@ class ExportCSV(generic.ListView):
     def get(self, request, *args, **kwargs):
 
 
-        from django.db import connection
-
         columns = ['pk', 'match', 'comment', 'first_id', 'first__name', 'second_id', 'second__name']
         p_query = Pair.objects.all().values_list(*columns).order_by('-match')
 
@@ -168,13 +168,13 @@ class ExportCSV(generic.ListView):
         header = ';'.join(columns) + '\n'
         out_str = ('{};'*len(columns))[:-1] + '\n'
         
-        io = io.StringIO()
-        io.write(header)
+        buf = io.StringIO()
+        buf.write(header)
         with connection.cursor() as cursor:
             cursor.execute('{}'.format(p_query.query))
-            [io.write(out_str.format(*v)) for v in cursor.fetchall()]
+            [buf.write(out_str.format(*v)) for v in cursor.fetchall()]
         
-        cf = ContentFile(io.getvalue())
+        cf = ContentFile(buf.getvalue())
         response = HttpResponse(cf,
                                 content_type="text/csv")
         response['Content-Disposition'] = 'attachment; filename="Pairs.csv"'
