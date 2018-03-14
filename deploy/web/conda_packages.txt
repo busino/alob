@@ -7,5 +7,6 @@ pandas
 scipy
 ipython
 scikit-learn
+scikit-image
 joblib
 pip

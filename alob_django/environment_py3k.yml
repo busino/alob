@@ -15,6 +15,7 @@ dependencies:
 - xlsxwriter
 - sphinx
 - scikit-learn
+- scikit-image
 - psutil
 - pip:
   - django-bootstrap3
