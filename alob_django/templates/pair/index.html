@@ -21,7 +21,7 @@
 {% if object_list %}
 
 <table id="list" class="table table-condensed table-nonfluid">
-  <caption>Num Pairs: {{ object_list.count }} of {{ paginator.count }}</caption>
+  <caption>Num Pairs: {{ object_list.count }} of {{ paginator.count }}&nbsp;<a href="./csv" class="btn btn-sm btn-default">{% download %} Export CSV</a></caption>
   <thead>
     <tr>
       <th>ID</th>

@@ -8,6 +8,7 @@ from time import clock
 import datetime
 import json
 import os
+import io
 
 import numpy
 from skimage.transform._geometric import matrix_transform
@@ -20,6 +21,7 @@ from django import forms
 from django.forms.forms import Form
 from django.urls.base import reverse_lazy
 from django_filters.views import FilterView
+from django.core.files.base import ContentFile
 
 from alob_plot.pair import pair_plot
 from alob.match import match_pc, match_images
@@ -45,23 +47,6 @@ class IndexView(generic.ListView):
                    .prefetch_related('first', 'second', 'first__points', 'second__points')\
                    .all()\
                    .order_by('-match')
-
-
-class Form(forms.Form):
-
-    q = forms.CharField(widget=forms.Textarea)
-
-
-class _SearchView(generic.View):
-    
-    def get(self, request):
-        form = Form(initial=dict(q='Pair.objects.filter(result__gt=0.9)\\\n.filter(first__date="2015-05-18")'))
-        return render(request, 'pair/search.html', {'form': form})
-    
-    def post(self, request):
-        q = request.POST.get('q')
-        object_list = eval(q)
-        return render_to_response('pair/index.html', context=dict(pairs=object_list))
 
 
 class DetailView(generic.DetailView):
@@ -166,11 +151,39 @@ class FilterView(FilterView):
         '''
         return self.render_to_response(context)
 
+class ExportCSV(generic.ListView):
+
+    
+    def get(self, request, *args, **kwargs):
+
+
+        from django.db import connection
+
+        columns = ['pk', 'match', 'comment', 'first_id', 'first__name', 'second_id', 'second__name']
+        p_query = Pair.objects.all().values_list(*columns).order_by('-match')
+
+        #
+        # CSV
+        #
+        header = ';'.join(columns) + '\n'
+        out_str = ('{};'*len(columns))[:-1] + '\n'
+        
+        io = io.StringIO()
+        io.write(header)
+        with connection.cursor() as cursor:
+            cursor.execute('{}'.format(p_query.query))
+            [io.write(out_str.format(*v)) for v in cursor.fetchall()]
+        
+        cf = ContentFile(io.getvalue())
+        response = HttpResponse(cf,
+                                content_type="text/csv")
+        response['Content-Disposition'] = 'attachment; filename="Pairs.csv"'
+        return response            
+
 
 def update(request, pk):
     
     match = request.GET.get('match', None)
-    print(match)
     if match is not None:
         match = {'0': 0, '1': 1, '-1': -1}[match]
     updated = Pair.objects.filter(pk=pk).update(match=match)
