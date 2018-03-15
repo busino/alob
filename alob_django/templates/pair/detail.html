@@ -111,7 +111,6 @@ $(document).ready(function(){
 
 <h2>Images</h2>
 
-<p>
 {% if pair.first.marked_image is not None %}
 <img style="border: 2px solid blue;" width="720px" src="{% url 'image:marked_image_jpeg' pair.first.pk %}">
 {% elif pair.first.jpeg_file is not None %}
@@ -119,17 +118,13 @@ $(document).ready(function(){
 {% else %}
 <p>No Image available.</p>
 {% endif %}
+
 {% if pair.second.marked_image is not None %}
 <img style="border: 2px solid red;" width="720px" src="{% url 'image:marked_image_jpeg' pair.second.pk %}">
 {% elif pair.second.jpeg_file is not None %}
 <img style="border: 2px solid red;" width="720px" src="{% url 'image:image_jpeg' pair.second.pk %}">
 {% else %}
 <p>No Image available.</p>
-{% endif %}
-</p>
-{% if log %}
-<h2>Log</h2>
-<pre>{{ log }}</pre>
 {% endif %}
 
 {% endblock %}
