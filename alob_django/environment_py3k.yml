@@ -5,23 +5,22 @@
 name: alob_c_env_py3k
 dependencies:
 - python=3.6
-- django=1.11
 - bokeh=0.12.10
 - ipython
-- numpy
-- pandas
-- scipy
+- numpy=1.13
+- pandas=0.22
+- scipy=1.0
 - xlrd
 - xlsxwriter
 - sphinx
-- scikit-learn
-- scikit-image
+- scikit-learn=0.19
+- scikit-image=0.13
 - psutil
 - pip:
+  - django=1.11
   - django-bootstrap3
   - django-extensions
   - django-filter
   - django-settings-export
   - joblib
   - mysqlclient
-

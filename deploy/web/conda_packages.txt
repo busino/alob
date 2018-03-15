@@ -1,12 +1,11 @@
 python==3.6
 bokeh==0.12.10
 nodejs==6.10.3
-django==1.11
-numpy
-pandas
-scipy
+numpy==1.13
+pandas==0.22
+scipy==1.0
 ipython
-scikit-learn
-scikit-image
+scikit-learn==0.19
+scikit-image==0.13
 joblib
 pip
