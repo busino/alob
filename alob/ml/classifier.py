@@ -80,10 +80,9 @@ def extract_helper(src, dst, search_radius):
     dst_t, (_, _), _, _, result = match_images(src_warts,
                                                dst_warts,
                                                search_radius)
-    
-    features['match_result_min'] = result/min(src.shape[0], dst.shape[0])
-    features['match_result_max'] = result/max(src.shape[0], dst.shape[0])
-    features['match_result_mean'] = result/((src.shape[0] + dst.shape[0])/2.)
+    features['match_result_min'] = result/min(src_warts.shape[1], dst_warts.shape[1])
+    features['match_result_max'] = result/max(src_warts.shape[1], dst_warts.shape[1])
+    features['match_result_mean'] = result/((src_warts.shape[1] + dst_warts.shape[1])/2.)
        
     # transform the point clouds
     #M = affine_matrix_from_points(dst_initial_points, src_initial_points)
