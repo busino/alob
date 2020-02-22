@@ -37,7 +37,7 @@ def train():
     image_ids = numpy.array(image_ids).astype(numpy.int64, copy=False)
     images = dict(zip(image_ids, images))
     
-    pairs = numpy.load('pairs.npy')
+    pairs = numpy.load('pairs.npy', allow_pickle=True)
     
 
 

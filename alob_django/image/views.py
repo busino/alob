@@ -201,6 +201,7 @@ class DetailView(generic.DetailView):
         
         context = super(DetailView, self).get_context_data(**kwargs)
         image = kwargs['object']
+        log.debug(image)
 
         if image.points.exists():
             points = image.pc_recarr()

@@ -8,6 +8,7 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'pool'
 
 urlpatterns = [
     url(r'^$', views.ListView.as_view(), name='index'),

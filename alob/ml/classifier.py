@@ -22,7 +22,7 @@ import alob.ml.features as alob_features
 from alob.match import match_images
 
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 
 '''
@@ -50,8 +50,10 @@ POINTS_MIN = (-2,-2)
 POINTS_MAX = (8, 2)
 POINTS_MEAN = (2, 0)
     
-def extract_helper(src, dst, search_radius):
+def extract_helper(src, dst, search_radius, f, s):
 
+
+    log.debug('Extract features for: {}, {}'.format(f, s))
 
     src = src.copy()
     dst = dst.copy()
@@ -170,12 +172,12 @@ class AlobPairClassifier:
         # Only start parallel processing if more than 10000 pairs have to be calculated
         if True:#len(pairs) > 2000:
             pairs_t = Parallel(n_jobs=-2, verbose=0)\
-                           (delayed(extract_helper)(images[f], images[s], self.search_radius) 
+                           (delayed(extract_helper)(images[f], images[s], self.search_radius, f, s) 
                             for f,s in pairs)          
         else:
             pairs_t = []
             for f,s in pairs:
-                pairs_t.append(extract_helper(images[f], images[s], self.search_radius))
+                pairs_t.append(extract_helper(images[f], images[s], self.search_radius, f, s))
         
         return pairs_t
 

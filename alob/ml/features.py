@@ -10,7 +10,7 @@ import numpy
 from alob.match import match_images, MatchPCL
 
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 
 class FeatureBase:

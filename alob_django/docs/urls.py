@@ -7,6 +7,7 @@ Author(s): R.Walker
 from django.conf.urls import url
 from .views import ServeDocView, DocsRootView
 
+app_name = 'docs'
 
 urlpatterns = [
     url(r'^$', DocsRootView.as_view(), name='index'),

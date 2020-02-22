@@ -35,8 +35,8 @@ def pair_plot(src, dst_corrected,
                   match_aspect=True, aspect_scale=1.,
                   tools=['pan, wheel_zoom, save'], 
                   toolbar_location='right',
-                  active_scroll='wheel_zoom',
-                  logo=None)
+                  active_scroll='wheel_zoom')
+    plot.toolbar.logo = None
 
     plot.min_border_left = plot.min_border_right = plot.min_border_top = plot.min_border_bottom = 12
     
@@ -117,7 +117,7 @@ def image_hist_data_plot(data):
     # Histogram
     #
     plot = figure(title="Result Histogram", tools="save")
-    
+    plot.toolbar.logo = None
 
     hist, edges = numpy.histogram(data, density=True, bins=20)
     plot.quad(top=hist, bottom=0, left=edges[:-1], right=edges[1:], line_color='black')
@@ -126,6 +126,7 @@ def image_hist_data_plot(data):
     # Plot
     #
     plot2 = figure(title='Result Data')
+    plot.toolbar.logo = None
     plot2.scatter(x=numpy.arange(data.shape[0]), y=numpy.sort(data))
         
     layout = Row(children=[plot, plot2])

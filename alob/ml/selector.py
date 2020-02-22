@@ -20,7 +20,7 @@ import alob.ml.features as alob_features
 from alob.match import match_pc
 
 
-log = logging.getLogger()
+log = logging.getLogger(__name__)
 
 #
 # Information extracted with preprocessing script
@@ -28,6 +28,7 @@ log = logging.getLogger()
 POINTS_MIN = (-1,-1.65)
 POINTS_MAX = (9, 1.65)
 POINTS_MEAN = (2.4, 0)
+
 
 def extract_helper(src, dst, search_radius):
 

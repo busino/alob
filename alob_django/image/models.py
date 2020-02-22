@@ -206,7 +206,7 @@ POINT_TYPE_CHOICES = ['wart', 'nose', 'tail', 'left_eye', 'right_eye']
 
 class Point(models.Model):
     
-    image = models.ForeignKey(Image, related_name='points', null=True)
+    image = models.ForeignKey(Image, related_name='points', null=True, on_delete=models.CASCADE)
     x = models.FloatField(null=True)
     y = models.FloatField(null=True)
     type = models.CharField(max_length=16, default='wart', choices=[(v, v) for v in POINT_TYPE_CHOICES])

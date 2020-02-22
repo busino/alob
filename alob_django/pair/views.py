@@ -14,7 +14,7 @@ import numpy
 from skimage.transform._geometric import matrix_transform
 
 from django.views import generic
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http.response import HttpResponse
 from django import forms

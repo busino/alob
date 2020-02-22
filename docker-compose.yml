@@ -10,15 +10,19 @@ services:
       MYSQL_DATABASE: alob
       MYSQL_USER: alob
       MYSQL_PASSWORD: alob
+      MYSQL_ROOT_HOST: '%'
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./log:/log
+      - ./deploy/db/my.cnf:/etc/my.cnf:ro
+      - ./data/backup:/backup
   web:
     build: deploy/web
     command: /opt/conda/bin/gunicorn alob_django.wsgi:application --log-level debug --capture-output --log-file /log/web.log -w 2 -b :8008
     volumes:
       - ./:/src
       - ./log:/log
+      - ./deploy/web/widgets.py:/opt/conda/lib/python3.7/site-packages/django/contrib/admin/widgets.py
     working_dir: /src/alob_django
     ports:
       - "8008:8008"
@@ -29,6 +33,8 @@ services:
     environment:
       - PYTHONPATH=/src
       - LANG=C.UTF-8
+      - DB_HOST=db
+      - DB_PORT=3306
   nginx:
     image: nginx:stable-alpine
     volumes:
@@ -40,3 +46,4 @@ services:
       - "80:80"
     depends_on:
       - web
+

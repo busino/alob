@@ -20,7 +20,7 @@ def result_plot(results, plot_width=800, plot_height=600, create_components=Fals
 
     plot = figure(plot_width=plot_width, plot_height=plot_height,
                   x_range=Range1d(0, len(results.result)), y_range=Range1d(0, max(results.result)*1.1),
-                  tools=['pan, box_zoom, reset, wheel_zoom, save'], toolbar_location='right', logo=None)
+                  tools=['pan, box_zoom, reset, wheel_zoom, save'], toolbar_options=dict(logo=None, toolbar_location='right'))
 
     plot.min_border_left = plot.min_border_right = plot.min_border_top = plot.min_border_bottom = 12
     
@@ -50,7 +50,7 @@ def image_plot(points, plot_width=800, plot_height=600, create_components=False)
     #
     plot = figure(plot_width=plot_width, plot_height=plot_height,
                   x_range=Range1d(0, 120), y_range=Range1d(-60, 60),
-                  tools=['pan, box_zoom, reset, wheel_zoom, save'], toolbar_location='right', logo=None)
+                  tools=['pan, box_zoom, reset, wheel_zoom, save'], toolbar_options=dict(logo=None, toolbar_location='right'))
 
     plot.min_border_left = plot.min_border_right = plot.min_border_top = plot.min_border_bottom = 12
     

@@ -7,7 +7,7 @@ Author(s): R.Walker
 import sys
 import os
 import logging
-from time import clock
+from time import perf_counter
 import datetime
 from itertools import product, combinations
 from collections import OrderedDict
@@ -89,8 +89,10 @@ def main(prediction_id, stats=False):
         features = cl.extract_features(images, pairs)
         features_df = pandas.DataFrame(features)
         features_df.to_json('features.json')
-        features = features_df.as_matrix()
+        log.info('Features extracted.')
+        features = features_df.values
         res = cl.predict(images, pairs, features)
+        log.info('Predicted.')
 
         prediction_df = pandas.DataFrame(res)
         prediction_df.to_json('prediction.json')
@@ -112,7 +114,7 @@ def main(prediction_id, stats=False):
         
             result_df = pandas.DataFrame(result).sort_values(by=['match', 'prediction'])
             result_df.to_json('result.json')
-            log.debug('Time used: {}s'.format(clock()-t0))
+            log.debug('Time used: {}s'.format(perf_counter()-t0))
             log.debug(result_df)
     except Exception as e:
         log.error(str(e))
@@ -142,7 +144,7 @@ if __name__ == '__main__':
     log.setLevel(logging.DEBUG)
     log.info('Process pid: {}'.format(os.getpid()))
 
-    t0 = clock()
+    t0 = perf_counter()
 
     parser = argparse.ArgumentParser(description='Predict Pools')
     
@@ -155,4 +157,4 @@ if __name__ == '__main__':
 
     main(args.prediction, args.stats)
 
-    log.debug('Time used: {:.2f}s'.format(clock()-t0))
+    log.debug('Time used: {:.2f}s'.format(perf_counter()-t0))

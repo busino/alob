@@ -11,8 +11,8 @@ from alob.ml.classifier import AlobPairClassifier
 
 class Pair(models.Model):
     
-    first = models.ForeignKey('image.Image', related_name='firsts', related_query_name='first', null=True)
-    second = models.ForeignKey('image.Image', related_name='seconds', related_query_name='second', null=True)
+    first = models.ForeignKey('image.Image', related_name='firsts', related_query_name='first', null=True, on_delete=models.CASCADE)
+    second = models.ForeignKey('image.Image', related_name='seconds', related_query_name='second', null=True, on_delete=models.CASCADE)
     result = models.FloatField(null=True, default=0.)
     match = models.SmallIntegerField(choices=[(0, 'No Match'), (1, 'Match'), (-1, 'Undefined'), (None, 'Not Set')], default=None, null=True)#models.NullBooleanField(default=None)
     rot = models.FloatField(default=0.)

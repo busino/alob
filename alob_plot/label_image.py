@@ -32,7 +32,7 @@ def image_label_plot(img, points, update_url, main_url, offset=[0,0], get_compon
     plot = figure(plot_width=800, plot_height=600,
                   #x_range=[0,xdim], y_range=[0,ydim],
                   match_aspect=True, aspect_scale=1.,
-                  tools='', logo=None,
+                  tools='',
                   title=None)
     # TODO: 
     # No ticks
@@ -177,7 +177,7 @@ def image_label_plot(img, points, update_url, main_url, offset=[0,0], get_compon
     #
   
     # Create A New TapDeleteTool
-    plot.add_tools(TapDeleteTool(renderers=[cr], source=source))
+    plot.add_tools(TapDeleteTool(source=source))
     #plot.add_tools(TapTool(behavior='select', renderers=[cr]))
     # Hover to inform the user that the glyph can be selected
     plot.add_tools(HoverTool(tooltips=None, renderers=[cr]))
@@ -187,6 +187,7 @@ def image_label_plot(img, points, update_url, main_url, offset=[0,0], get_compon
     plot.toolbar.active_scroll = wz
     plot.add_tools(PanTool())
     plot.toolbar_location = None
+    plot.toolbar.logo = None
     plot.axis.visible = False
     plot.xgrid.grid_line_color = None
     plot.ygrid.grid_line_color = None

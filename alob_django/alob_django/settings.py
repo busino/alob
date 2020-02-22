@@ -11,7 +11,7 @@ import os
 #
 #
 
-DEPLOY_TYPE = 'production'#'production'# 'dev'
+DEPLOY_TYPE = 'dev'#'production'# 'dev'
 
 SEARCH_RADIUS = 0.17
 PRESELECT_SEARCH_RADIUS = 0.25
@@ -38,8 +38,7 @@ SECRET_KEY = 'tudscz@3sih!+isw_#fl9#v0e^b5*k_&-&5-3t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '192.168.1.33', '159.100.247.204', 'alob.busino.ch']
-
+ALLOWED_HOSTS = ['159.100.250.81', 'localhost', '127.0.0.1', '159.100.247.204']
 
 # Application definition
 INSTALLED_APPS = [
@@ -159,7 +158,7 @@ STATIC_URL = '/static/'
 
 # Settings Export
 ###################################
-BOKEH_DIR = 'vendor/bokeh_0.12.10'
+BOKEH_DIR = 'vendor/bokeh_1.4.0'
 BOOTSTRAP_DIR = 'vendor/bootstrap-3.3.7'
 JQUERY = 'vendor/js/jquery-3.2.0.min.js'
 JQUERY_TABLESORTER = 'vendor/js/jquery.tablesorter.min.js'
@@ -197,6 +196,9 @@ LOGGING = {
         },
     },
     'loggers': {
+        'django.utils.autoreload': {
+           'level': 'INFO',
+        },
         'django': {
             'handlers': ['console', 'logfile'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),

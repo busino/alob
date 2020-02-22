@@ -7,6 +7,8 @@ Author(s): R.Walker
 from django.conf.urls import url
 from . import views
 
+app_name = 'prediction'
+
 urlpatterns = [
     # List
     url(r'^$', views.IndexView.as_view(), name='index'),

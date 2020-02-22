@@ -8,6 +8,8 @@ from django.conf.urls import url, include
 
 from . import views
 
+app_name = 'image'
+
 urlpatterns = [
     # List
     url(r'^$', views.IndexView.as_view(), name='index'),

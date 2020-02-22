@@ -4,20 +4,22 @@
 #
 name: alob_c_env_py3k
 dependencies:
-- python=3.6
-- bokeh=0.12.10
+- python=3.7
+- conda-build
+- bokeh
 - ipython
-- numpy=1.13
-- pandas=0.22
-- scipy=1.0
+- numpy
+- pandas
+- scipy
 - xlrd
 - xlsxwriter
 - sphinx
-- scikit-learn=0.19
-- scikit-image=0.13
+- scikit-learn
+- scikit-image
 - psutil
+- pip
 - pip:
-  - django=1.11
+  - django
   - django-bootstrap3
   - django-extensions
   - django-filter
