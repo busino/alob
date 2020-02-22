@@ -1,4 +1,4 @@
-django==1.11
+django==3.0
 django-extensions
 django-bootstrap3
 django-filter
@@ -7,7 +7,7 @@ xlrd
 xlsxwriter
 sphinx
 psutil
-mysqlclient
+mysqlclient==1.4
 gunicorn
 colorlog
 pytz

@@ -6,23 +6,23 @@ name: alob_c_env_py3k
 dependencies:
 - python=3.7
 - conda-build
-- bokeh
+- bokeh=1.4
 - ipython
-- numpy
-- pandas
-- scipy
-- xlrd
-- xlsxwriter
+- numpy=1.18
+- pandas=1.0
+- scipy=1.4
 - sphinx
-- scikit-learn
-- scikit-image
+- scikit-learn=0.22
+- scikit-image=0.16
 - psutil
 - pip
 - pip:
-  - django
+  - django==3.0
   - django-bootstrap3
   - django-extensions
   - django-filter
   - django-settings-export
+  - xlrd
+  - xlsxwriter
   - joblib
-  - mysqlclient
+  - mysqlclient==1.4
