@@ -5,7 +5,7 @@ numpy==1.18
 pandas==1.0
 scipy==1.4
 ipython
-scikit-learn==0.122
+scikit-learn==0.12
 scikit-image==0.16
 joblib
 pip
