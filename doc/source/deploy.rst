@@ -33,7 +33,7 @@ Docker-Compose
 
 .. code-block:: python
 
-    sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.19.0/docker-compose-$(uname -s)-$(uname -m)"
+    sudo curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
 
     sudo usermod -aG docker ubuntu
@@ -44,6 +44,7 @@ Checkout Sources
 .. code-block:: python
 
     git clone SOURCE_LINK
+    git clone https://github.com/busino/alob.git
 
 
 Setup

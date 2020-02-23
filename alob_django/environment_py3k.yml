@@ -17,7 +17,7 @@ dependencies:
 - psutil
 - pip
 - pip:
-  - django==3.0
+  - django>=3.0.3
   - django-bootstrap3
   - django-extensions
   - django-filter
