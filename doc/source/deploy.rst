@@ -53,6 +53,7 @@ Setup
 .. code-block:: python
 
     cd alob
+    mkdir data
     cd data
     sudo ln -s ../alob_django/media/ .
     cd ..
@@ -60,7 +61,7 @@ Setup
     docker-compose exec web /bin/bash
     web> python manage.py makemigrations image pair prediction
     web> python manage.py migrate
-    web> python loaddata dump.json
+    web> python manage.py loaddata dump.json
 
 Make sure that *ALLOWED_HOST* is correctly set in *alob_django/alob_django/settings.py*.
 

@@ -20,7 +20,7 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh \
     && rm ~/miniconda.sh
 ENV PATH /opt/conda/bin:$PATH
 RUN conda install --file /install/conda_packages.txt \
-    && conda clean -i -l -t -y
+    && conda clean --all -y
 RUN pip install -r /install/requirements.txt \
     && rm -rf /root/.cache/pip/*
 CMD ["python"]

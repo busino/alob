@@ -22,7 +22,6 @@ services:
     volumes:
       - ./:/src
       - ./log:/log
-      - ./deploy/web/widgets.py:/opt/conda/lib/python3.7/site-packages/django/contrib/admin/widgets.py
     working_dir: /src/alob_django
     ports:
       - "8008:8008"

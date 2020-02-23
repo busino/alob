@@ -7,7 +7,7 @@ xlrd
 xlsxwriter
 sphinx
 psutil
-mysqlclient==1.4
+mysqlclient==1.4.6
 gunicorn
 colorlog
 pytz
