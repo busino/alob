@@ -27,6 +27,7 @@
       <th># Images</th>
       <th>Edit</th>
       <th>Delete</th>
+      <th>Generate</th>
     </tr>
   </thead>
   <tbody>
@@ -38,6 +39,7 @@
         <td>{{ obj.images.count }}</td>
         <td><a class="btn btn-xs btn-link" href="{% url 'image:pool:update' obj.id %}">{% edit %}</a></td>
         <td><a class="btn btn-xs btn-link" href="{% url 'image:pool:delete' obj.id %}">{% delete %}</a></td>
+        <td><a class="btn btn-xs btn-link" href="{% url 'image:pool:generate_pairpool' obj.id %}">{% pair %}</a></td>
     </tr>
     {% endfor %}
    </tbody>

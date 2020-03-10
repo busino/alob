@@ -4,6 +4,8 @@ Alob Project
 Author(s): R.Walker
 
 '''
+from itertools import combinations
+
 from django.views import generic
 
 from django.urls.base import reverse_lazy
@@ -11,7 +13,7 @@ from django.http.response import HttpResponseRedirect
 from django.db.models import Q
 
 from image.models import Image, ImagePool
-from pair.models import Pair
+from pair.models import Pair, PairPool
 
 from .forms import ImagePoolForm
 
@@ -143,3 +145,33 @@ class LabelView(generic.DetailView):
             return HttpResponseRedirect(redirect_to=reverse_lazy('image:pool:detail', kwargs={'pk': obj.pk}))
     
     
+
+class GeneratePairPoolView(generic.RedirectView, generic.DetailView):
+    
+    model = APP_CLASS
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        pk = self.object.pk
+        
+        # Select images
+        image_ids = Image\
+                    .objects\
+                    .filter(pools=pk,\
+                            is_labeled=True)\
+                    .values_list('pk', flat=True)
+    
+        # Pair generation
+        pairs = list(combinations( image_ids,  2))
+        num_pairs = len(pairs)
+        pair_pks = []
+        for f,s in pairs:
+            pair = Pair.objects.filter(first_id__in=[f,s], second_id__in=[f,s]).first()
+            if pair is None:
+                pair = Pair.objects.create(first_id=f, second_id=s)
+            pair_pks.append(pair.pk)
+        # Generate Pair Pool
+        pp = PairPool.objects.create(name=self.object.name + '-pairs')
+        pp.pairs.set(pair_pks)
+        url = reverse_lazy('pair:pool:detail'.format(), kwargs=dict(pk=pp.pk))
+        return HttpResponseRedirect(url)

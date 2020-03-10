@@ -21,6 +21,7 @@ urlpatterns = [
     #
     url(r'^(?P<pk>[0-9]+)/images/$', views.ImagesView.as_view(), name='images'),
     url(r'^(?P<pk>[0-9]+)/pairs/$', views.PairsView.as_view(), name='pairs'),
+    url(r'^(?P<pk>[0-9]+)/generate_pairpool/$', views.GeneratePairPoolView.as_view(), name='generate_pairpool'),
 
 ]
 

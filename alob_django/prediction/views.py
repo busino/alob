@@ -10,7 +10,6 @@ import datetime
 import json
 import subprocess
 import os
-from collections import OrderedDict
 from itertools import combinations
 
 import joblib
@@ -139,12 +138,12 @@ class GeneratePairView(generic.RedirectView, generic.DetailView):
         
         pool_ids = list(pred_obj.pools.all().values_list('id', flat=True))
     
-        images = OrderedDict([(im.pk, im.pc_recarr()) for im in Image\
-                                                           .objects\
-                                                           .filter(pools__in=pool_ids,\
-                                                                   is_labeled=True)])
+        image_ids = Image\
+                    .objects\
+                    .filter(pools__in=pool_ids,\
+                            is_labeled=True)\
+                    .values_list('pk', flat=True)
     
-        image_ids = images.keys()
         log.debug('Images: {}'.format(len(image_ids)))
         
         # Pair generation
