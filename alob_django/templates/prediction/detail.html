@@ -36,6 +36,7 @@
 <div class="row">
   <a class="btn btn-link" href="{% url 'prediction:delete' object.id %}">{% delete %} Delete</a>
   <a class="btn btn-link" href="{% url 'prediction:update' object.id %}">{% edit %} Edit</a>
+  <a class="btn btn-link" href="{% url 'prediction:generate_pairs' object.id %}">{% pair %} Generate Pairs</a>
   <a class="btn btn-link" href="">{% refresh %} Refresh</a>
 </div>
 

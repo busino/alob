@@ -11,7 +11,7 @@ import os
 #
 #
 
-DEPLOY_TYPE = 'production'#'production'# 'dev'
+DEPLOY_TYPE = 'dev'#'production'# 'dev'
 
 SEARCH_RADIUS = 0.17
 PRESELECT_SEARCH_RADIUS = 0.25

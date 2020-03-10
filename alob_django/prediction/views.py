@@ -10,12 +10,15 @@ import datetime
 import json
 import subprocess
 import os
+from collections import OrderedDict
+from itertools import combinations
 
 import joblib
 
 from django.views import generic
 from django.db.models import Q
 from django.urls.base import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 from alob.utils import kill_process_tree, elapsed_human, process_exists
 
@@ -124,6 +127,40 @@ class DeleteView(generic.DeleteView):
     
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+class GeneratePairView(generic.RedirectView, generic.DetailView):
+    
+    model = APP_CLASS
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        pred_obj = self.object
+        
+        pool_ids = list(pred_obj.pools.all().values_list('id', flat=True))
+    
+        images = OrderedDict([(im.pk, im.pc_recarr()) for im in Image\
+                                                           .objects\
+                                                           .filter(pools__in=pool_ids,\
+                                                                   is_labeled=True)])
+    
+        image_ids = images.keys()
+        log.debug('Images: {}'.format(len(image_ids)))
+        
+        # Pair generation
+        pairs = list(combinations( image_ids,  2))
+        num_pairs = len(pairs)
+        log.debug('Num Pairs: {}'.format(len(pairs)))
+        for f,s in pairs:
+            pair = Pair.objects.filter(first_id__in=[f,s], second_id__in=[f,s]).first()
+            if pair is None:
+                pair = Pair.objects.create(first_id=f, second_id=s)
+        return HttpResponseRedirect(self.get_redirect_url(*args, **kwargs))
+
+    def get_redirect_url(self, *args, **kwargs):
+        url = reverse_lazy('{}:detail'.format(APP_NAME), kwargs=dict(pk=self.object.pk))
+        return url
+
 
 class ActionView(generic.RedirectView, generic.DetailView):
 
