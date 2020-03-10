@@ -134,7 +134,7 @@ class LabelView(generic.DetailView):
         if labeled.exists():
             image = labeled.first()
         else:
-            image = object.images.first()
+            image = obj.images.first()
         if image:
             url = reverse_lazy('image:label', kwargs={'pk': image.pk})
             url = str(url) + '?pool={}'.format(obj.pk)

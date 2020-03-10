@@ -9,7 +9,7 @@ Download and install *Miniconda* for Python (>=3.6) from `http://conda.pydata.or
 Create virtual environment
 
 ::
-
+    cd ROOT_DIR/alob_django
     conda env create -f environment_py3k.yml -n alob_c_env_py3k
 
 MySQL
@@ -33,13 +33,13 @@ Now the virtual environment can be started with:
 ::
 
     lnx> source activate alob_c_env_py3k
-    win> activate alob_c_env_py3k
+    win> conda activate alob_c_env_py3k
 
 To finish the setup you have to add a ``.pth`` file that the alob modules can be found by the python interpreter:
 
 
 ::
-
+    cd ROOT_DIR
     conda develop .
 
 
